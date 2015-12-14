@@ -1,0 +1,14 @@
+paths:
+    migrations: %%PHINX_CONFIG_DIR%%/migrations
+
+environments:
+    default_migration_table: phinxlog
+    default_database: pgsql
+    pgsql:
+        adapter: pgsql
+        host: 127.0.0.1
+        name: webhome-calendar
+        user: ndewez
+        pass: ndewez
+        port: 5432
+        charset: utf8

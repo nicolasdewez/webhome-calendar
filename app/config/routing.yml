@@ -1,0 +1,27 @@
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /connect
+
+hwi_oauth_login:
+    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+    prefix:   /login
+
+app:
+    resource: "@AppBundle/Controller"
+    type: annotation
+
+webhome_login:
+    pattern :   /login/check-webhome
+
+login:
+    path: /login
+
+logout:
+    path: /logout
+
+api_v0:
+    resource: "@AppBundle/Controller/V0"
+    type: annotation
+    prefix: /api/{_locale}/V0
+    requirements: { "_locale": "fr|en" }
+    defaults: { "_locale": "%locale%" }

@@ -1,0 +1,23 @@
+{
+    "name": "webhome-calendar",
+    "version": "1.0.0",
+    "devDependencies": {
+        "babelify": "^6.4.0",
+        "gulp": "^3.9.0",
+        "gulp-autoprefixer": "^3.1.0",
+        "gulp-browserify": "^0.5.1",
+        "gulp-concat": "^2.6.0",
+        "gulp-csso": "^1.0.1",
+        "gulp-env": "^0.2.0",
+        "gulp-eslint": "^1.0.0",
+        "gulp-insert-lines": "0.0.4",
+        "gulp-less": "^3.0.3",
+        "gulp-livereload": "^3.8.1",
+        "gulp-load-plugins": "^0.10.0",
+        "gulp-plumber": "^1.0.1",
+        "gulp-rename": "^1.2.2",
+        "gulp-shell": "^0.5.1",
+        "gulp-uglify": "^1.4.2",
+        "rimraf": "^2.4.3"
+    }
+}

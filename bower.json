@@ -1,0 +1,12 @@
+{
+    "name": "webhome-calendar",
+    "version": "1.0.0",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components"
+    ],
+    "dependencies": {
+        "bootstrap": "~3.3.5"
+    }
+}

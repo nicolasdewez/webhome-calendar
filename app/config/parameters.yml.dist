@@ -1,0 +1,17 @@
+parameters:
+    database_host:     127.0.0.1
+    database_port:     ~
+    database_name:     webhome-calendar
+    database_user:     ndewez
+    database_password: ndewez
+
+    mailer_transport:  smtp
+    mailer_host:       127.0.0.1
+    mailer_user:       ~
+    mailer_password:   ~
+
+    secret:            ThisTokenIsNotSoSecretChangeIt
+
+    webhome_auth_url: 'http://localhost:8001/app_dev.php'
+    client_id: 1_b8b4nurfz2g444444sogw4oo8s8048gk844oo8c0o0ckkss04
+    client_secret: 3st7md55x3wgkgoc8c4owocg48kkkwg4ws08wcgg00s84s4c4s

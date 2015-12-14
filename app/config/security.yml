@@ -1,0 +1,34 @@
+security:
+    providers:
+        webhome:
+            id: webhome.user.provider
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js|fonts)/
+            security: false
+
+        api:
+            pattern:    ^/api
+            stateless:  true
+            anonymous:  true
+
+        secured_area:
+            anonymous: ~
+            logout:
+                path:   /logout
+                success_handler: webhome.handler.logout
+            oauth:
+                resource_owners:
+                    webhome: /login/check-webhome
+                login_path: /connect/webhome
+                use_forward: false
+                failure_path: /login
+
+                oauth_user_provider:
+                    service: webhome.user.provider
+
+    access_control:
+        - { path: ^/connect/webhome, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api, roles: [ IS_AUTHENTICATED_ANONYMOUSLY ] }
+        - { path: ^/, roles: IS_AUTHENTICATED_REMEMBERED }
