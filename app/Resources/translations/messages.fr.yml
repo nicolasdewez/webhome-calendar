@@ -42,6 +42,28 @@ jobs:
         not_deactivate: Ce poste de travail ne peut pas être désactivé
         not_activate: Ce poste de travail ne peut pas être activé
 
+calendars:
+    title:
+        list: Liste des agendas
+        edit: Modifier un agendas
+        show: Voir un agendas
+        add: Ajouter un agendas
+
+    label:
+        title: Libellé
+        active: Actif
+
+    message:
+        active: L'agenda est maintenant actif
+        inactive: L'agenda est maintenant inactif
+        edit: Agenda modifié
+        add: Agenda ajouté
+        delete: Agenda supprimé
+
+    error:
+        not_deactivate: Cet agenda ne peut pas être désactivé
+        not_activate: Cet agenda ne peut pas être activé
+
 reports:
     search:
         calendar: Agenda

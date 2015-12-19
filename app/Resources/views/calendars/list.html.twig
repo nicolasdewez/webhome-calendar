@@ -1,0 +1,68 @@
+{% extends '@NdewezWebHomeCommon/base.html.twig' %}
+
+{% import "@NdewezWebHomeCommon/macros/links.html.twig" as links %}
+{% import "@NdewezWebHomeCommon/macros/icons.html.twig" as icons %}
+
+{% block title %}{{ parent() }} - {{ 'calendars.title.list'|trans }}{% endblock %}
+
+{% block breadcrumb %}
+    {{ include('NdewezWebHomeCommonBundle::breadcrumb.thml.twig', {
+            'links': [
+                {'title': 'home.title.home', 'route': 'app_home'},
+                {'title': 'calendars.title.list', 'active': true},
+            ]
+        })
+    }}
+{% endblock %}
+
+{% block body %}
+    <h2>{{ 'calendars.title.list'|trans }}</h2>
+
+    <table class="appCalendarsList">
+        <thead>
+            <tr>
+                <th>{{ 'calendars.label.title'|trans }}</th>
+                <th>{{ 'calendars.label.active'|trans }}</th>
+                <th>{{ 'actions.label'|trans }} {% if is_granted('ROLE_CALD_CALD_ADD') %}{{ links.plus('calendars.title.add'|trans, path('app_calendars_add')) }}{% endif %}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for calendar in calendars %}
+            <tr>
+                <td>{{ calendar.title }}</td>
+                <td class="appCalendarsList-active">
+                    {{ icons.active("", calendar.active) }}
+                    {{ icons.deactive("", not calendar.active) }}
+                </td>
+                <td class="appCalendarsList-actions">
+                    {% if is_granted('ROLE_CALD_CALD_EDIT') %}
+                        {{ links.edit('actions.edit'|trans, path('app_calendars_edit', {'id': calendar.id})) }}
+                    {% else %}
+                        {{ links.show('actions.show'|trans, path('app_calendars_show', {'id': calendar.id})) }}
+                    {% endif %}
+
+                    {% if is_granted('ROLE_CALD_CALD_ACTIV') %}
+                        {{ links.deactive('actions.deactivate'|trans, null, path('app_calendars_deactivate', {'id': calendar.id}), calendar.active) }}
+                        {{ links.active('actions.activate'|trans, null, path('app_calendars_activate', {'id': calendar.id}), not calendar.active) }}
+                    {% endif %}
+
+                    {% if is_granted('ROLE_CALD_CALD_DEL') %}
+                        {{ links.delete('actions.delete'|trans, null, path('app_calendars_delete', {'id': calendar.id})) }}
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <th colspan="3" class="text-center">{{ 'table.no_element'|trans }}</th>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        new CalendarsList($('.appCalendarsList'));
+    </script>
+{% endblock %}

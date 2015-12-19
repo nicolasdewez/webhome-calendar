@@ -41,6 +41,28 @@ jobs:
         not_deactivate: Job can't be deactivate
         not_activate: Job can't be activate
 
+calendars:
+    title:
+        list: List of calendars
+        edit: Edit a calendar
+        show: Show a calendar
+        add: Add a calendar
+
+    label:
+        title: Title
+        active: Active
+
+    message:
+        active: Calendar is now active
+        inactive: Calendar is now inactive
+        edit: Calendar edited
+        add: Calendar added
+        delete: Calendar deleted
+
+    error:
+        not_deactivate: Calendar can't be deactivate
+        not_activate: Calendar can't be activate
+
 reports:
     search:
         calendar: Calendar

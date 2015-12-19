@@ -72,7 +72,7 @@ class BuilderMenuItems implements BuilderMenuItemsInterface
                 $subItem = new MenuItemLink();
                 $subItem
                     ->setTitle('menu.parameters.calendar')
-                    ->setRoute('app_home');
+                    ->setRoute('app_calendars_list');
 
                 $item->addItem($subItem);
             }

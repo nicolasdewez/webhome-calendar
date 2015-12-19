@@ -1,0 +1,21 @@
+{% extends '@NdewezWebHomeCommon/base.html.twig' %}
+
+{% block title %}{{ parent() }} - {{ 'calendars.title.add'|trans }}{% endblock %}
+
+{% block breadcrumb %}
+    {{ include('NdewezWebHomeCommonBundle::breadcrumb.thml.twig', {
+            'links': [
+                {'title': 'home.title.home', 'route': 'app_home'},
+                {'title': 'calendars.title.list', 'route': 'app_calendars_list'},
+                {'title': 'calendars.title.add', 'active': true},
+            ]
+        })
+    }}
+{% endblock %}
+
+{% block body %}
+    <h2>{{ 'calendars.title.add'|trans }}</h2>
+
+    {{ form(form) }}
+
+{% endblock %}

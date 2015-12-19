@@ -52,13 +52,6 @@ class JobsController extends AbstractController
 
             // Delete section
             if ($form->has('delete') && $form->get('delete')->isClicked()) {
-                if ($job->hasUser()) {
-                    $this->get('session')->getFlashBag()->add('error', $this->get('translator')->trans('jobs.error.contains_user'));
-
-                    return new RedirectResponse($this->generateUrl('app_jobs_list'));
-                }
-
-                // Delete element and redirect
                 $manager->remove($job);
                 $manager->flush();
                 $this->get('session')->getFlashBag()->add('notice', $this->get('translator')->trans('jobs.message.delete'));
@@ -128,7 +121,7 @@ class JobsController extends AbstractController
     {
         $this->assertXmlHttpRequest($request);
 
-        if (!$this->isJobDeletable($job)) {
+        if (!$this->isJobDeletable()) {
             throw new BadRequestHttpException($this->get('translator')->trans('jobs.error.not_activate'));
         }
 
