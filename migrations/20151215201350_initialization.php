@@ -26,7 +26,7 @@ class Initialization extends AbstractMigration
         $this->execute('CREATE TABLE job_calendar (id INT NOT NULL, job_id INT DEFAULT NULL, calendar_id INT DEFAULT NULL, date DATE NOT NULL, PRIMARY KEY(id));');
         $this->execute('CREATE INDEX IDX_9EE043DBE04EA9 ON job_calendar (job_id);');
         $this->execute('CREATE INDEX IDX_9EE043DA40A2C8 ON job_calendar (calendar_id);');
-        $this->execute('CREATE TABLE google_calendars (id INT NOT NULL, calendar_id INT DEFAULT NULL, client_id VARCHAR(255) NOT NULL, client_secret VARCHAR(255) NOT NULL, project_id VARCHAR(255) NOT NULL, internal_id VARCHAR(255) NOT NULL, active BOOLEAN NOT NULL, PRIMARY KEY(id));');
+        $this->execute('CREATE TABLE google_calendars (id INT NOT NULL, title VARCHAR(255) NOT NULL, calendar_id INT DEFAULT NULL, client_id VARCHAR(255) NOT NULL, client_secret VARCHAR(255) NOT NULL, project_id VARCHAR(255) NOT NULL, internal_id VARCHAR(255) NOT NULL, active BOOLEAN NOT NULL, PRIMARY KEY(id));');
         $this->execute('CREATE INDEX IDX_B16E0F97A40A2C8 ON google_calendars (calendar_id);');
         $this->execute('CREATE UNIQUE INDEX google_calendars_google_unique ON google_calendars (client_id, project_id, internal_id);');
         $this->execute('CREATE TABLE jobs (id INT NOT NULL, code VARCHAR(5) NOT NULL, title VARCHAR(255) NOT NULL, start_time TIME(0) WITHOUT TIME ZONE NOT NULL, end_time TIME(0) WITHOUT TIME ZONE NOT NULL, duration INT NOT NULL, active BOOLEAN NOT NULL, PRIMARY KEY(id));');

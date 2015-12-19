@@ -1,0 +1,34 @@
+{% extends '@NdewezWebHomeCommon/base.html.twig' %}
+
+{% import "@NdewezWebHomeCommon/macros/forms.html.twig" as forms %}
+
+{% block title %}{{ parent() }} - {{ 'google_calendars.title.edit'|trans }}{% endblock %}
+
+{% block breadcrumb %}
+    {{ include('NdewezWebHomeCommonBundle::breadcrumb.thml.twig', {
+            'links': [
+                {'title': 'home.title.home', 'route': 'app_home'},
+                {'title': 'google_calendars.title.list', 'route': 'app_google_calendars_list'},
+                {'title': 'google_calendars.title.edit', 'active': true},
+            ]
+        })
+    }}
+{% endblock %}
+
+{% block body %}
+
+    <h2>{{ 'google_calendars.title.edit'|trans }}</h2>
+
+    {{ form_start(form) }}
+        {{ form_row(form.title)}}
+        {{ form_row(form.calendar)}}
+        {{ form_row(form.clientId)}}
+        {{ form_row(form.clientSecret)}}
+        {{ form_row(form.projectId)}}
+        {{ form_row(form.internalId)}}
+        {{ form_row(form.active)}}
+
+        {{ forms.buttons(form, ['submit', 'delete']) }}
+    {{ form_end(form) }}
+
+{% endblock %}

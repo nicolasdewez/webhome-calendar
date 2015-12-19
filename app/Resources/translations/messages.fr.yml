@@ -64,6 +64,33 @@ calendars:
         not_deactivate: Cet agenda ne peut pas être désactivé
         not_activate: Cet agenda ne peut pas être activé
 
+google_calendars:
+    title:
+        list: Liste des connexions Google
+        edit: Modifier une connexion Google
+        show: Voir une connexion Google
+        add: Ajouter une connexion Google
+
+    label:
+        title: Libellé
+        calendar: Agenda
+        client_id: Client id
+        client_secret: Client secret
+        project_id: Project id
+        internal_id: Internal id
+        active: Actif
+
+    message:
+        active: La connexion Google est maintenant active
+        inactive: La connexion Google est maintenant inactive
+        edit: Connexion Google modifiée
+        add: Connexion Google ajoutée
+        delete: Connexion Google supprimée
+
+    error:
+        not_deactivate: La connexion Google ne peut pas être désactivée
+        not_activate: La connexion Google ne peut pas être activée
+
 reports:
     search:
         calendar: Agenda

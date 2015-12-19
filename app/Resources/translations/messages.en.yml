@@ -63,6 +63,33 @@ calendars:
         not_deactivate: Calendar can't be deactivate
         not_activate: Calendar can't be activate
 
+google_calendars:
+    title:
+        list: List of Google connections
+        edit: Edit a Google connection
+        show: Show a Google connection
+        add: Add a Google connection
+
+    label:
+        title: Title
+        calendar: Calendar
+        client_id: Client id
+        client_secret: Client secret
+        project_id: Project id
+        internal_id: Internal id
+        active: Active
+
+    message:
+        active: Google connection is now active
+        inactive: Google connection is now inactive
+        edit: Google connection edited
+        add: Google connection added
+        delete: Google connection deleted
+
+    error:
+        not_deactivate: Google connection can't be deactivate
+        not_activate: Google connection can't be activate
+
 reports:
     search:
         calendar: Calendar

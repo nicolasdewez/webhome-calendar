@@ -35,8 +35,8 @@ class CalendarsController extends AbstractController
     }
 
     /**
-     * @param Calendar     $calendar
-     * @param Request $request
+     * @param Calendar $calendar
+     * @param Request  $request
      *
      * @return Response
      *
@@ -108,8 +108,8 @@ class CalendarsController extends AbstractController
     }
 
     /**
-     * @param Calendar     $calendar
-     * @param Request $request
+     * @param Calendar $calendar
+     * @param Request  $request
      *
      * @return JsonResponse
      *
@@ -131,8 +131,8 @@ class CalendarsController extends AbstractController
     }
 
     /**
-     * @param Calendar     $calendar
-     * @param Request $request
+     * @param Calendar $calendar
+     * @param Request  $request
      *
      * @return JsonResponse
      *
@@ -154,8 +154,8 @@ class CalendarsController extends AbstractController
     }
 
     /**
-     * @param Calendar     $calendar
-     * @param Request $request
+     * @param Calendar $calendar
+     * @param Request  $request
      *
      * @return JsonResponse
      *

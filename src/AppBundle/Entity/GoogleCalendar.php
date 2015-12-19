@@ -37,6 +37,13 @@ class GoogleCalendar
      *
      * @ORM\Column()
      */
+    private $title;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column()
+     */
     private $clientId;
 
     /**
@@ -99,6 +106,30 @@ class GoogleCalendar
     public function getCalendar()
     {
         return $this->calendar;
+    }
+
+    /**
+     * Set title.
+     *
+     * @param string $title
+     *
+     * @return GoogleCalendar
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title.
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 
     /**
