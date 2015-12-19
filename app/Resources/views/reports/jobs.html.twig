@@ -1,0 +1,62 @@
+{% extends '@NdewezWebHomeCommon/base.html.twig' %}
+
+{% import "@NdewezWebHomeCommon/macros/links.html.twig" as links %}
+{% import "@NdewezWebHomeCommon/macros/icons.html.twig" as icons %}
+
+{% block title %}{{ parent() }} - {{ 'reports.jobs.title'|trans }}{% endblock %}
+
+{% block breadcrumb %}
+    {{ include('NdewezWebHomeCommonBundle::breadcrumb.thml.twig', {
+            'links': [
+                {'title': 'home.title.home', 'route': 'app_home'},
+                {'title': 'reports.jobs.title', 'active': true},
+            ]
+        })
+    }}
+{% endblock %}
+
+{% block body %}
+    <h2>{{ 'reports.jobs.title'|trans }}</h2>
+
+    <div class="appReports">
+        {{ include('reports/search.html.twig') }}
+
+        {% if reports is not empty %}
+            <div class="col-md-12 appReports-report">
+                {% for detail in reports.detail %}
+
+                    <table class="appReports-table">
+                        <thead>
+                        <tr>
+                            <th class="appReports-column">{{ detail.title }}</th>
+                            {% for job, value in reports.jobs %}
+                                <th class="appReports-column">{{ job }}</th>
+                            {% endfor %}
+                            <th class="appReports-column">{{ 'reports.jobs.total'|trans }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for month in detail.months %}
+                            <tr>
+                                <td>{{ month.title }}</td>
+                                {% for row in month.rows %}
+                                    <td>{% if row.number is not empty %}{{ row.number }} ({{ row.duration|mnToH }}){% endif %}</td>
+                                {% endfor %}
+                                <td>{{ month.number }} ({{ month.duration|mnToH }})</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+
+                        <tfoot>
+                            <tr>
+                                <th colspan="{{ 1+reports.jobs|length }}">{{ 'reports.jobs.total'|trans }}</th>
+                                <th>{{ detail.number }} ({{ detail.duration|mnToH }})</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

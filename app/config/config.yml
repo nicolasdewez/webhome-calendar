@@ -73,9 +73,9 @@ doctrine:
         auto_mapping: true
 
 hwi_oauth:
-    http_client:
-        timeout: 10 # WHAT !!!!
-    firewall_name: secured_area
+#    http_client:
+#        timeout: 10
+    firewall_names: [secured_area]
     resource_owners:
         webhome:
             type: oauth2

@@ -1,6 +1,56 @@
 menu:
     home: Home
+    parameters:
+        title: Parameters
+        job: Jobs
+        job_nurseries: Nursery time
+        calendar: Calendars
+        google: Google connections
+    reports:
+        title: Reports
+        job: Job
+        nursery: Nursery
 
 home:
     title:
         home: Home
+
+jobs:
+    title:
+        list: List of jobs
+        edit: Edit a job
+        show: Show a job
+        add: Add a job
+
+    label:
+        code: Code
+        title: Title
+        start: Start time
+        end: End time
+        duration: Duration (h)
+        active: Active
+
+    message:
+        active: Job is now active
+        inactive: Job is now inactive
+        edit: Job edited
+        add: Job added
+        delete: Job deleted
+
+    error:
+        not_deactivate: Job can't be deactivate
+        not_activate: Job can't be activate
+
+reports:
+    search:
+        calendar: Calendar
+
+    jobs:
+        title: Job Report
+        total: Total
+
+    nurseries:
+        title: Nursery Report
+        duration: Duration
+        number_meal: Meal
+        total: Total

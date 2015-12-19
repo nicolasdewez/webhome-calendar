@@ -6,5 +6,14 @@
     <services>
         <!-- Menus -->
         <service id="app.menu.builder" class="AppBundle\Service\BuilderMenuItems" />
+
+        <!-- Reports -->
+        <service id="app.report.job" class="AppBundle\Service\JobReports" />
+        <service id="app.report.nursery" class="AppBundle\Service\NurseryReports" />
+
+        <!-- Twig Extension -->
+        <service id="app.twig.time" class="AppBundle\Twig\TimeExtension" public="false">
+            <tag name="twig.extension" />
+        </service>
     </services>
 </container>

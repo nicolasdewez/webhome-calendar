@@ -1,6 +1,57 @@
 menu:
     home: Accueil
+    parameters:
+         title: Paramétrage
+         job: Postes de travail
+         job_nurseries: Temps de garde
+         calendar: Agendas
+         google: Connexions Google
+    reports:
+         title: Rapport
+         job: Travail
+         nursery: Garderie
+
 
 home:
     title:
         home: Accueil
+
+jobs:
+    title:
+        list: Liste des postes de travail
+        edit: Modifier un poste de travail
+        show: Voir un poste de travail
+        add: Ajouter un poste de travail
+
+    label:
+        code: Code
+        title: Libellé
+        start: Heure début
+        end: Heure fin
+        duration: Durée (h)
+        active: Actif
+
+    message:
+        active: Le poste de travail est maintenant actif
+        inactive: Le poste de travail est maintenant inactif
+        edit: Poste de travail modifié
+        add: Poste de travail ajouté
+        delete: Poste de travail supprimé
+
+    error:
+        not_deactivate: Ce poste de travail ne peut pas être désactivé
+        not_activate: Ce poste de travail ne peut pas être activé
+
+reports:
+    search:
+        calendar: Agenda
+
+    jobs:
+        title: Reporting travail
+        total: Total
+
+    nurseries:
+        title: Reporting garderie
+        duration: Durée
+        number_meal: Repas
+        total: Total

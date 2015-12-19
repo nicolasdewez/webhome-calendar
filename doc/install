@@ -2,4 +2,3 @@
 app/console doctrine:database:drop --force
 app/console doctrine:database:create
 ./bin/phinx migrate
-app/console doctrine:fixtures:load --append

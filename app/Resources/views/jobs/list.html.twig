@@ -1,0 +1,76 @@
+{% extends '@NdewezWebHomeCommon/base.html.twig' %}
+
+{% import "@NdewezWebHomeCommon/macros/links.html.twig" as links %}
+{% import "@NdewezWebHomeCommon/macros/icons.html.twig" as icons %}
+
+{% block title %}{{ parent() }} - {{ 'jobs.title.list'|trans }}{% endblock %}
+
+{% block breadcrumb %}
+    {{ include('NdewezWebHomeCommonBundle::breadcrumb.thml.twig', {
+            'links': [
+                {'title': 'home.title.home', 'route': 'app_home'},
+                {'title': 'jobs.title.list', 'active': true},
+            ]
+        })
+    }}
+{% endblock %}
+
+{% block body %}
+    <h2>{{ 'jobs.title.list'|trans }}</h2>
+
+    <table class="appJobsList">
+        <thead>
+            <tr>
+                <th>{{ 'jobs.label.code'|trans }}</th>
+                <th>{{ 'jobs.label.title'|trans }}</th>
+                <th>{{ 'jobs.label.start'|trans }}</th>
+                <th>{{ 'jobs.label.end'|trans }}</th>
+                <th>{{ 'jobs.label.duration'|trans }}</th>
+                <th>{{ 'jobs.label.active'|trans }}</th>
+                <th>{{ 'actions.label'|trans }} {% if is_granted('ROLE_CALD_JOBS_ADD') %}{{ links.plus('jobs.title.add'|trans, path('app_jobs_add')) }}{% endif %}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for job in jobs %}
+            <tr>
+                <td class="appJobsList-code">{{ job.code }}</td>
+                <td>{{ job.title }}</td>
+                <td class="appJobsList-start">{{ job.startTime|date('H:i') }}</td>
+                <td class="appJobsList-end">{{ job.endTime|date('H:i') }}</td>
+                <td class="appJobsList-duration">{{ job.duration|mnToH }}</td>
+                <td class="appJobsList-active">
+                    {{ icons.active("", job.active) }}
+                    {{ icons.deactive("", not job.active) }}
+                </td>
+                <td class="appJobsList-actions">
+                    {% if is_granted('ROLE_CALD_JOBS_EDIT') %}
+                        {{ links.edit('actions.edit'|trans, path('app_jobs_edit', {'id': job.id})) }}
+                    {% else %}
+                        {{ links.show('actions.show'|trans, path('app_jobs_show', {'id': job.id})) }}
+                    {% endif %}
+
+                    {% if is_granted('ROLE_CALD_JOBS_ACTIV') %}
+                        {{ links.deactive('actions.deactivate'|trans, null, path('app_jobs_deactivate', {'id': job.id}), job.active) }}
+                        {{ links.active('actions.activate'|trans, null, path('app_jobs_activate', {'id': job.id}), not job.active) }}
+                    {% endif %}
+
+                    {% if is_granted('ROLE_CALD_JOBS_DEL') %}
+                        {{ links.delete('actions.delete'|trans, null, path('app_jobs_delete', {'id': job.id})) }}
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <th colspan="7" class="text-center">{{ 'table.no_element'|trans }}</th>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        new JobsList($('.appJobsList'));
+    </script>
+{% endblock %}

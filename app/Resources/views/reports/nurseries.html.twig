@@ -1,0 +1,59 @@
+{% extends '@NdewezWebHomeCommon/base.html.twig' %}
+
+{% import "@NdewezWebHomeCommon/macros/links.html.twig" as links %}
+{% import "@NdewezWebHomeCommon/macros/icons.html.twig" as icons %}
+
+{% block title %}{{ parent() }} - {{ 'reports.nurseries.title'|trans }}{% endblock %}
+
+{% block breadcrumb %}
+    {{ include('NdewezWebHomeCommonBundle::breadcrumb.thml.twig', {
+            'links': [
+                {'title': 'home.title.home', 'route': 'app_home'},
+                {'title': 'reports.nurseries.title', 'active': true},
+            ]
+        })
+    }}
+{% endblock %}
+
+{% block body %}
+    <h2>{{ 'reports.nurseries.title'|trans }}</h2>
+
+    <div class="appReports">
+        {{ include('reports/search.html.twig') }}
+
+        {% if reports is not empty %}
+            <div class="col-md-12 appReports-report">
+                {% for year in reports %}
+
+                    <table class="appReports-table">
+                        <thead>
+                        <tr>
+                            <th class="appReports-column">{{ year.title }}</th>
+                            <th class="appReports-column">{{ 'reports.nurseries.duration'|trans }}</th>
+                            <th class="appReports-column">{{ 'reports.nurseries.number_meal'|trans }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for month in year.months %}
+                            <tr>
+                                <td>{{ month.title }}</td>
+                                <td>{{ month.duration|mnToH }}</td>
+                                <td>{{ month.numberMeal }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+
+                        <tfoot>
+                        <tr>
+                            <th>{{ 'reports.nurseries.total'|trans }}</th>
+                            <th>{{ year.duration|mnToH }}</th>
+                            <th>{{ year.numberMeal }}</th>
+                        </tr>
+                        </tfoot>
+                    </table>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

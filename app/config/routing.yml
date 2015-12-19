@@ -11,7 +11,7 @@ app:
     type: annotation
 
 webhome_login:
-    pattern :   /login/check-webhome
+    path :   /login/check-webhome
 
 login:
     path: /login
