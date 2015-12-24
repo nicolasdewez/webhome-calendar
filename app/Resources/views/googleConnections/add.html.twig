@@ -1,20 +1,20 @@
 {% extends '@NdewezWebHomeCommon/base.html.twig' %}
 
-{% block title %}{{ parent() }} - {{ 'google_calendars.title.add'|trans }}{% endblock %}
+{% block title %}{{ parent() }} - {{ 'google_connections.title.add'|trans }}{% endblock %}
 
 {% block breadcrumb %}
     {{ include('NdewezWebHomeCommonBundle::breadcrumb.thml.twig', {
             'links': [
                 {'title': 'home.title.home', 'route': 'app_home'},
-                {'title': 'google_calendars.title.list', 'route': 'app_google_calendars_list'},
-                {'title': 'google_calendars.title.add', 'active': true},
+                {'title': 'google_connections.title.list', 'route': 'app_google_connections_list'},
+                {'title': 'google_connections.title.add', 'active': true},
             ]
         })
     }}
 {% endblock %}
 
 {% block body %}
-    <h2>{{ 'google_calendars.title.add'|trans }}</h2>
+    <h2>{{ 'google_connections.title.add'|trans }}</h2>
 
     {{ form(form) }}
 

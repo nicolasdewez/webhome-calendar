@@ -45,12 +45,16 @@ jobs:
 calendars:
     title:
         list: Liste des agendas
+        list_by_google_connection: Liste des agendas d'une connexion Google
         edit: Modifier un agendas
         show: Voir un agendas
         add: Ajouter un agendas
+        add_google_calendars: Ajouter une connexion à Google
 
     label:
         title: Libellé
+        google_connections: Connexions Google
+        google_connection: Connexion Google
         active: Actif
 
     message:
@@ -64,20 +68,24 @@ calendars:
         not_deactivate: Cet agenda ne peut pas être désactivé
         not_activate: Cet agenda ne peut pas être activé
 
-google_calendars:
+google_connections:
     title:
         list: Liste des connexions Google
+        list_by_calendar: Liste des connexions Google d'un agenda
         edit: Modifier une connexion Google
         show: Voir une connexion Google
         add: Ajouter une connexion Google
 
     label:
         title: Libellé
+        calendars: Agendas
         calendar: Agenda
         client_id: Client id
         client_secret: Client secret
         project_id: Project id
         internal_id: Internal id
+        job_day_complete: Evénement toute la journée pour un poste de travail
+        nursery_day_complete: Evénement toute la journée pour la garderie
         active: Actif
 
     message:

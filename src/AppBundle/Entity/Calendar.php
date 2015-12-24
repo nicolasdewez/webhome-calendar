@@ -43,6 +43,13 @@ class Calendar
     /**
      * @var ArrayCollection
      *
+     * @ORM\ManyToMany(targetEntity="GoogleConnection", inversedBy="calendars")
+     */
+    private $googleConnections;
+
+    /**
+     * @var ArrayCollection
+     *
      * @ORM\OneToMany(targetEntity="JobCalendar", mappedBy="calendar")
      */
     private $jobCalendars;
@@ -54,18 +61,11 @@ class Calendar
      */
     private $nurseryCalendars;
 
-    /**
-     * @var ArrayCollection
-     *
-     * @ORM\OneToMany(targetEntity="GoogleCalendar", mappedBy="calendar")
-     */
-    private $googleCalendars;
-
     public function __construct()
     {
         $this->jobCalendars = new ArrayCollection();
         $this->nurseryCalendars = new ArrayCollection();
-        $this->googleCalendars = new ArrayCollection();
+        $this->googleConnections = new ArrayCollection();
     }
 
     /**
@@ -145,8 +145,28 @@ class Calendar
     /**
      * @return ArrayCollection
      */
-    public function getGoogleCalendars()
+    public function getGoogleConnections()
     {
-        return $this->googleCalendars;
+        return $this->googleConnections;
+    }
+
+    /**
+     * @param GoogleConnection $googleConnection
+     */
+    public function addGoogleConnection(GoogleConnection $googleConnection)
+    {
+        if ($this->googleConnections->contains($googleConnection)) {
+            return;
+        }
+
+        $this->googleConnections->add($googleConnection);
+    }
+
+    /**
+     * @param GoogleConnection $googleConnection
+     */
+    public function removeGoogleConnection(GoogleConnection $googleConnection)
+    {
+        $this->googleConnections->removeElement($googleConnection);
     }
 }

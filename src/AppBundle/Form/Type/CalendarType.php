@@ -2,7 +2,10 @@
 
 namespace AppBundle\Form\Type;
 
+use Doctrine\ORM\EntityRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\Options;
@@ -25,6 +28,23 @@ class CalendarType extends AbstractType
 
         $builder
             ->add('title', null, ['label' => 'calendars.label.title'])
+
+            ->add('googleConnections', CollectionType::class, [
+                'entry_type' => EntityType::class,
+                'allow_add'    => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'entry_options' => [
+                    'class' => 'AppBundle:GoogleConnection',
+                    'choice_label' => 'title',
+                    'query_builder' => function (EntityRepository $er) {
+                        return $er->createQueryBuilder('c')
+                            ->where('c.active = TRUE')
+                            ->orderBy('c.id');
+                    },
+                ],
+            ])
+
             ->add('active', null, ['required' => false, 'label' => 'calendars.label.active', 'attr' => ['disabled' => $disabled]]);
 
         if ($options['submit']) {

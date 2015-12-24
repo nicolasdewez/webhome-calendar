@@ -59,20 +59,20 @@ class BuilderMenuItems implements BuilderMenuItemsInterface
                 $item->addItem(new MenuItemDivider());
             }
 
+            if ($this->isGranted('ROLE_CALD_GOOGL', $authorizations)) {
+                $subItem = new MenuItemLink();
+                $subItem
+                    ->setTitle('menu.parameters.google')
+                    ->setRoute('app_google_connections_list');
+
+                $item->addItem($subItem);
+            }
+
             if ($this->isGranted('ROLE_CALD_CALD', $authorizations)) {
                 $subItem = new MenuItemLink();
                 $subItem
                     ->setTitle('menu.parameters.calendar')
                     ->setRoute('app_calendars_list');
-
-                $item->addItem($subItem);
-            }
-
-            if ($this->isGranted('ROLE_CALD_GOOGL', $authorizations)) {
-                $subItem = new MenuItemLink();
-                $subItem
-                    ->setTitle('menu.parameters.google')
-                    ->setRoute('app_google_calendars_list');
 
                 $item->addItem($subItem);
             }

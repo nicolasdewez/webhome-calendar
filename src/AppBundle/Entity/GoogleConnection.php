@@ -2,19 +2,20 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * GoogleCalendar.
+ * GoogleConnection.
  *
- * @ORM\Table(name="google_calendars", uniqueConstraints={
- *      @ORM\UniqueConstraint(name="google_calendars_google_unique", columns = {"client_id", "project_id", "internal_id"})
+ * @ORM\Table(name="google_connections", uniqueConstraints={
+ *      @ORM\UniqueConstraint(name="google_connections_google_unique", columns = {"client_id", "project_id", "internal_id"})
  * }))
  * @ORM\Entity
  * @UniqueEntity({"clientId", "projectId", "internalId"})
  */
-class GoogleCalendar
+class GoogleConnection
 {
     /**
      * @var int
@@ -24,13 +25,6 @@ class GoogleCalendar
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-    /**
-     * @var Calendar
-     *
-     * @ORM\ManyToOne(targetEntity="Calendar", inversedBy="googleCalendars")
-     */
-    private $calendar;
 
     /**
      * @var string
@@ -72,7 +66,35 @@ class GoogleCalendar
      *
      * @ORM\Column(type="boolean")
      */
+    private $jobDayComplete;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean")
+     */
+    private $nurseryDayComplete;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean")
+     */
     private $active;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="Calendar", mappedBy="googleConnections")
+     */
+    private $calendars;
+
+    public function __construct()
+    {
+        $this->calendars = new ArrayCollection();
+        $this->jobDayComplete = true;
+        $this->nurseryDayComplete = false;
+    }
 
     /**
      * Get id.
@@ -85,27 +107,13 @@ class GoogleCalendar
     }
 
     /**
-     * Set calendar.
-     *
-     * @param Calendar $calendar
-     *
-     * @return GoogleCalendar
-     */
-    public function setCalendar(Calendar $calendar)
-    {
-        $this->calendar = $calendar;
-
-        return $this;
-    }
-
-    /**
-     * Get calendar.
+     * Get calendars.
      *
      * @return Calendar
      */
-    public function getCalendar()
+    public function getCalendars()
     {
-        return $this->calendar;
+        return $this->calendars;
     }
 
     /**
@@ -113,7 +121,7 @@ class GoogleCalendar
      *
      * @param string $title
      *
-     * @return GoogleCalendar
+     * @return GoogleConnection
      */
     public function setTitle($title)
     {
@@ -137,7 +145,7 @@ class GoogleCalendar
      *
      * @param string $clientId
      *
-     * @return GoogleCalendar
+     * @return GoogleConnection
      */
     public function setClientId($clientId)
     {
@@ -161,7 +169,7 @@ class GoogleCalendar
      *
      * @param string $clientSecret
      *
-     * @return GoogleCalendar
+     * @return GoogleConnection
      */
     public function setClientSecret($clientSecret)
     {
@@ -185,7 +193,7 @@ class GoogleCalendar
      *
      * @param string $projectId
      *
-     * @return GoogleCalendar
+     * @return GoogleConnection
      */
     public function setProjectId($projectId)
     {
@@ -209,7 +217,7 @@ class GoogleCalendar
      *
      * @param string $internalId
      *
-     * @return GoogleCalendar
+     * @return GoogleConnection
      */
     public function setInternalId($internalId)
     {
@@ -227,12 +235,61 @@ class GoogleCalendar
     {
         return $this->internalId;
     }
+    
+    /**
+     * Set jobDayComplete.
+     *
+     * @param bool $jobDayComplete
+     *
+     * @return GoogleConnection
+     */
+    public function setJobDayComplete($jobDayComplete)
+    {
+        $this->jobDayComplete = $jobDayComplete;
+
+        return $this;
+    }
+
+    /**
+     * Get jobDayComplete.
+     *
+     * @return bool
+     */
+    public function isJobDayComplete()
+    {
+        return $this->jobDayComplete;
+    }
+    
+    /**
+     * Set nurseryDayComplete.
+     *
+     * @param bool $nurseryDayComplete
+     *
+     * @return GoogleConnection
+     */
+    public function setNurseryDayComplete($nurseryDayComplete)
+    {
+        $this->nurseryDayComplete = $nurseryDayComplete;
+
+        return $this;
+    }
+
+    /**
+     * Get nurseryDayComplete.
+     *
+     * @return bool
+     */
+    public function isNurseryDayComplete()
+    {
+        return $this->nurseryDayComplete;
+    }
+    
     /**
      * Set active.
      *
      * @param bool $active
      *
-     * @return GoogleCalendar
+     * @return GoogleConnection
      */
     public function setActive($active)
     {

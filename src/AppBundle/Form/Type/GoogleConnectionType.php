@@ -2,8 +2,6 @@
 
 namespace AppBundle\Form\Type;
 
-use Doctrine\ORM\EntityRepository;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -11,9 +9,9 @@ use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class GoogleCalendarType.
+ * Class GoogleConnectionType.
  */
-class GoogleCalendarType extends AbstractType
+class GoogleConnectionType extends AbstractType
 {
     /**
      * {@inheritDoc}
@@ -26,21 +24,13 @@ class GoogleCalendarType extends AbstractType
         }
 
         $builder
-            ->add('title', null, ['label' => 'google_calendars.label.title'])
-            ->add('calendar', EntityType::class, [
-                'label' => 'google_calendars.label.calendar',
-                'class' => 'AppBundle:Calendar',
-                'choice_label' => 'title',
-                'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('c')
-                        ->where('c.active = TRUE')
-                        ->orderBy('c.id');
-                },
-            ])
-            ->add('clientId', null, ['label' => 'google_calendars.label.client_id'])
-            ->add('clientSecret', null, ['label' => 'google_calendars.label.client_secret'])
-            ->add('projectId', null, ['label' => 'google_calendars.label.project_id'])
-            ->add('internalId', null, ['label' => 'google_calendars.label.internal_id'])
+            ->add('title', null, ['label' => 'google_connections.label.title'])
+            ->add('clientId', null, ['label' => 'google_connections.label.client_id'])
+            ->add('clientSecret', null, ['label' => 'google_connections.label.client_secret'])
+            ->add('projectId', null, ['label' => 'google_connections.label.project_id'])
+            ->add('internalId', null, ['label' => 'google_connections.label.internal_id'])
+            ->add('jobDayComplete', null, ['required' => false, 'label' => 'google_connections.label.job_day_complete'])
+            ->add('nurseryDayComplete', null, ['required' => false, 'label' => 'google_connections.label.nursery_day_complete'])
             ->add('active', null, ['required' => false, 'label' => 'calendars.label.active', 'attr' => ['disabled' => $disabled]]);
 
         if ($options['submit']) {
@@ -61,7 +51,7 @@ class GoogleCalendarType extends AbstractType
         $resolver->setAllowedTypes('delete', 'boolean');
         $resolver->setAllowedTypes('submit', 'boolean');
         $resolver->setDefaults([
-            'data_class' => 'AppBundle\\Entity\\GoogleCalendar',
+            'data_class' => 'AppBundle\\Entity\\GoogleConnection',
             'delete' => false,
             'activate' => true,
             'submit' => true,

@@ -4,20 +4,25 @@
 {% import "macros/links.html.twig" as calendar_links %}
 {% import "@NdewezWebHomeCommon/macros/icons.html.twig" as icons %}
 
-{% block title %}{{ parent() }} - {{ 'calendars.title.list'|trans }}{% endblock %}
+{% block title %}{{ parent() }} - {{ 'calendars.title.list_by_google_connection'|trans }}{% endblock %}
 
 {% block breadcrumb %}
     {{ include('NdewezWebHomeCommonBundle::breadcrumb.thml.twig', {
             'links': [
                 {'title': 'home.title.home', 'route': 'app_home'},
-                {'title': 'calendars.title.list', 'active': true},
+                {'title': 'calendars.title.list', 'route': 'app_calendars_list'},
+                {'title': 'calendars.title.list_by_google_connection', 'active': true},
             ]
         })
     }}
 {% endblock %}
 
 {% block body %}
-    <h2>{{ 'calendars.title.list'|trans }}</h2>
+    <h2>{{ 'calendars.title.list_by_google_connection'|trans }}</h2>
+
+    <div class="form-group">
+        <label>{{ 'calendars.label.google_connection'|trans }} :</label> {{ googleConnection.title }}
+    </div>
 
     <table class="appCalendarsList">
         <thead>

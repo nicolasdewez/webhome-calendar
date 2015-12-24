@@ -1,0 +1,92 @@
+{% extends '@NdewezWebHomeCommon/base.html.twig' %}
+
+{% import "@NdewezWebHomeCommon/macros/links.html.twig" as links %}
+{% import "macros/links.html.twig" as calendar_links %}
+{% import "@NdewezWebHomeCommon/macros/icons.html.twig" as icons %}
+
+{% block title %}{{ parent() }} - {{ 'google_connections.title.list'|trans }}{% endblock %}
+
+{% block breadcrumb %}
+    {{ include('NdewezWebHomeCommonBundle::breadcrumb.thml.twig', {
+            'links': [
+                {'title': 'home.title.home', 'route': 'app_home'},
+                {'title': 'google_connections.title.list', 'active': true},
+            ]
+        })
+    }}
+{% endblock %}
+
+{% block body %}
+    <h2>{{ 'google_connections.title.list'|trans }}</h2>
+
+    <table class="appGoogleConnectionsList">
+        <thead>
+            <tr>
+                <th>{{ 'google_connections.label.title'|trans }}</th>
+                <th>{{ 'google_connections.label.calendars'|trans }}</th>
+                <th>{{ 'google_connections.label.job_day_complete'|trans }}</th>
+                <th>{{ 'google_connections.label.nursery_day_complete'|trans }}</th>
+                <th>{{ 'google_connections.label.active'|trans }}</th>
+                <th>{{ 'actions.label'|trans }} {% if is_granted('ROLE_CALD_GOOGL_ADD') %}{{ links.plus('google_connections.title.add'|trans, path('app_google_connections_add')) }}{% endif %}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for googleConnection in googleConnections %}
+            <tr>
+                <td>{{ googleConnection.title }}</td>
+                <td class="appGoogleConnectionsList-calendars">
+                    {{ googleConnection.calendars|length }}
+                    {% if is_granted('ROLE_CALD_CALD_SHOW') %}
+                        {{ calendar_links.calendars('google_connections.label.calendars'|trans, path('app_calendars_list_google_connections', {'id': googleConnection.id})) }}
+                    {% endif %}
+                </td>
+                <td class="appGoogleConnectionsList-active">
+                    {% if googleConnection.jobDayComplete %}
+                        {{ icons.active("", googleConnection.jobDayComplete) }}
+                    {% else %}
+                        {{ icons.deactive("", not googleConnection.jobDayComplete) }}
+                    {% endif %}
+                </td>
+                <td class="appGoogleConnectionsList-active">
+                    {% if googleConnection.nurseryDayComplete %}
+                        {{ icons.active("", googleConnection.nurseryDayComplete) }}
+                    {% else %}
+                        {{ icons.deactive("", not googleConnection.nurseryDayComplete) }}
+                    {% endif %}
+                </td>
+                <td class="appGoogleConnectionsList-active">
+                    {{ icons.active("", googleConnection.active) }}
+                    {{ icons.deactive("", not googleConnection.active) }}
+                </td>
+                <td class="appGoogleConnectionsList-actions">
+                    {% if is_granted('ROLE_CALD_GOOGL_EDIT') %}
+                        {{ links.edit('actions.edit'|trans, path('app_google_connections_edit', {'id': googleConnection.id})) }}
+                    {% else %}
+                        {{ links.show('actions.show'|trans, path('app_google_connections_show', {'id': googleConnection.id})) }}
+                    {% endif %}
+
+                    {% if is_granted('ROLE_CALD_GOOGL_ACTIV') %}
+                        {{ links.deactive('actions.deactivate'|trans, null, path('app_google_connections_deactivate', {'id': googleConnection.id}), googleConnection.active) }}
+                        {{ links.active('actions.activate'|trans, null, path('app_google_connections_activate', {'id': googleConnection.id}), not googleConnection.active) }}
+                    {% endif %}
+
+                    {% if is_granted('ROLE_CALD_GOOGL_DEL') %}
+                        {{ links.delete('actions.delete'|trans, null, path('app_google_connections_delete', {'id': googleConnection.id})) }}
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <th colspan="6" class="text-center">{{ 'table.no_element'|trans }}</th>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        new GoogleConnectionsList($('.appGoogleConnectionsList'));
+    </script>
+{% endblock %}

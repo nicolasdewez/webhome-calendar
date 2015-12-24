@@ -1,0 +1,9 @@
+{% macro google_connections(title, href, rel) %}
+    {% import '@NdewezWebHomeCommon/macros/links.html.twig' as links %}
+    {{ links.link('glyphicon glyphicon-cloud', title, href, rel) }}
+{% endmacro %}
+
+{% macro calendars(title, href, rel) %}
+    {% import '@NdewezWebHomeCommon/macros/links.html.twig' as links %}
+    {{ links.link('glyphicon glyphicon-calendar', title, href, rel) }}
+{% endmacro %}

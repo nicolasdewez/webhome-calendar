@@ -1,6 +1,9 @@
 {% extends '@NdewezWebHomeCommon/base.html.twig' %}
 
+{% form_theme form 'calendars/form_theme_googleConnections.html.twig' %}
+
 {% import "@NdewezWebHomeCommon/macros/forms.html.twig" as forms %}
+{% import "@NdewezWebHomeCommon/macros/links.html.twig" as links %}
 
 {% block title %}{{ parent() }} - {{ 'calendars.title.edit'|trans }}{% endblock %}
 
@@ -19,11 +22,28 @@
 
     <h2>{{ 'calendars.title.edit'|trans }}</h2>
 
+    <div class="appCalendarsEdit">
     {{ form_start(form) }}
         {{ form_row(form.title)}}
         {{ form_row(form.active)}}
 
-        {{ forms.buttons(form, ['submit', 'delete']) }}
-    {{ form_end(form) }}
+        <h3>Google connections {{ links.plus('calendars.title.add_google_connections'|trans) }}</h3>
 
+        <div class="appCalendarsEdit-connections" data-prototype="{{ form_widget(form.googleConnections.vars.prototype)|e }}">
+            {{ form_row(form.googleConnections) }}
+        </div>
+
+        <div class="clear"></div>
+        <div class="appCalendarsEdit-buttons">
+            {{ forms.buttons(form, ['submit', 'delete']) }}
+        </div>
+    {{ form_end(form) }}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        new CalendarsEdit($('.appCalendarsEdit-connections'), $('a.glyphicon-plus'), $('.appCalendarsEdit-remove a'));
+    </script>
 {% endblock %}

@@ -44,12 +44,16 @@ jobs:
 calendars:
     title:
         list: List of calendars
+        list_by_google_connection: List of calendars by Google connection
         edit: Edit a calendar
         show: Show a calendar
         add: Add a calendar
+        add_google_connections: Add a connection to Google
 
     label:
         title: Title
+        google_connections: Google connections
+        google_connection: Google connection
         active: Active
 
     message:
@@ -63,20 +67,24 @@ calendars:
         not_deactivate: Calendar can't be deactivate
         not_activate: Calendar can't be activate
 
-google_calendars:
+google_connections:
     title:
         list: List of Google connections
+        list_by_calendar: List of Google connections by calendar
         edit: Edit a Google connection
         show: Show a Google connection
         add: Add a Google connection
 
     label:
         title: Title
+        calendars: Calendars
         calendar: Calendar
         client_id: Client id
         client_secret: Client secret
         project_id: Project id
         internal_id: Internal id
+        job_day_complete: Event complete day for job
+        nursery_day_complete: Event complete day for nursery
         active: Active
 
     message:

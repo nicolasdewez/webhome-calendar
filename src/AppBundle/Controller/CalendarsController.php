@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Calendar;
+use AppBundle\Entity\GoogleConnection;
 use AppBundle\Form\Type\CalendarType;
 use Ndewez\WebHome\CommonBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -35,6 +36,22 @@ class CalendarsController extends AbstractController
     }
 
     /**
+     * @param GoogleConnection $googleConnection
+     *
+     * @return Response
+     *
+     * @Route("/google-calendar/{id}", name="app_calendars_list_google_connections", methods="GET")
+     * @Security("has_role('ROLE_CALD_CALD_SHOW')")
+     */
+    public function listByGoogleConnectionAction(GoogleConnection $googleConnection)
+    {
+        return $this->render('calendars/listByGoogleConnection.html.twig', [
+            'calendars' => $googleConnection->getCalendars(),
+            'googleConnection' => $googleConnection,
+        ]);
+    }
+
+    /**
      * @param Calendar $calendar
      * @param Request  $request
      *
@@ -61,6 +78,8 @@ class CalendarsController extends AbstractController
 
             $manager->flush();
             $this->get('session')->getFlashBag()->add('notice', $this->get('translator')->trans('calendars.message.edit'));
+
+            return new RedirectResponse($this->generateUrl('app_calendars_edit', ['id' => $calendar->getId()]));
         }
 
         return $this->render('calendars/edit.html.twig', ['form' => $form->createView(), 'calendar' => $calendar]);
