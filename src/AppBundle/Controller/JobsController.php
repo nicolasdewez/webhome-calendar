@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 /**
  * Class JobsController.
@@ -45,7 +44,10 @@ class JobsController extends AbstractController
      */
     public function editAction(Job $job, Request $request)
     {
-        $form = $this->get('form.factory')->create(JobType::class, $job, ['delete' => $this->isJobDeletable(), 'activate' => $this->isJobActivate()]);
+        $form = $this->get('form.factory')->create(JobType::class, $job, [
+            'delete' => $this->isJobDeletable($job),
+            'activate' => $this->isGranted('ROLE_CALD_JOBS_ACTIV'),
+        ]);
 
         if ($form->handleRequest($request) && $form->isValid()) {
             $manager = $this->get('doctrine.orm.entity_manager');
@@ -121,10 +123,6 @@ class JobsController extends AbstractController
     {
         $this->assertXmlHttpRequest($request);
 
-        if (!$this->isJobDeletable()) {
-            throw new BadRequestHttpException($this->get('translator')->trans('jobs.error.not_activate'));
-        }
-
         $job->setActive(true);
         $this->get('doctrine.orm.entity_manager')->flush();
 
@@ -143,10 +141,6 @@ class JobsController extends AbstractController
     public function deactivateAction(Job $job, Request $request)
     {
         $this->assertXmlHttpRequest($request);
-
-        if (!$this->isJobDeletable()) {
-            throw new BadRequestHttpException($this->get('translator')->trans('jobs.error.not_deactivate'));
-        }
 
         $job->setActive(false);
         $this->get('doctrine.orm.entity_manager')->flush();
@@ -175,18 +169,12 @@ class JobsController extends AbstractController
     }
 
     /**
+     * @param Job $job
+     *
      * @return bool
      */
-    private function isJobDeletable()
+    private function isJobDeletable(Job $job)
     {
-        return $this->isGranted('ROLE_CALD_JOBS_DEL');
-    }
-
-    /**
-     * @return bool
-     */
-    private function isJobActivate()
-    {
-        return $this->isGranted('ROLE_CALD_JOBS_ACTIV');
+        return $this->isGranted('ROLE_CALD_JOBS_DEL') && !count($job->getJobCalendars()) && !count($job->getNurseries());
     }
 }

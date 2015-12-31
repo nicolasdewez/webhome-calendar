@@ -5,6 +5,7 @@ namespace AppBundle\Form\Type;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -12,9 +13,9 @@ use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class CalendarType.
+ * Class JobNurseryType.
  */
-class CalendarType extends AbstractType
+class JobNurseryType extends AbstractType
 {
     /**
      * {@inheritDoc}
@@ -27,25 +28,40 @@ class CalendarType extends AbstractType
         }
 
         $builder
-            ->add('title', null, ['label' => 'calendars.label.title'])
+            ->add('job', EntityType::class, [
+                'label' => 'job_nurseries.label.job',
+                'class' => 'AppBundle:Job',
+                'choice_label' => 'title',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('j')
+                        ->where('j.active = TRUE')
+                        ->orderBy('j.code');
+                },
+            ])
+            ->add('day', ChoiceType::class, [
+                'label' => 'job_nurseries.label.day',
+                'choices' => [
+                    'days.monday' => 1,
+                    'days.tuesday' => 2,
+                    'days.wednesday' => 3,
+                    'days.thursday' => 4,
+                    'days.friday' => 5,
+                    'days.saturday' => 6,
+                    'days.sunday' => 7,
+                ],
+                'choices_as_values' => true,
+            ])
+            ->add('serial', null, ['required' => false, 'label' => 'job_nurseries.label.serial'])
+            ->add('numberDays', null, ['label' => 'job_nurseries.label.number_days'])
 
-            ->add('googleConnections', CollectionType::class, [
-                'entry_type' => EntityType::class,
+            ->add('periods', CollectionType::class, [
+                'entry_type' => JobNurseryPeriodType::class,
                 'allow_add'    => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-                'options' => [// @TODO Change to entry_options but ko
-                    'class' => 'AppBundle:GoogleConnection',
-                    'choice_label' => 'title',
-                    'query_builder' => function (EntityRepository $er) {
-                        return $er->createQueryBuilder('c')
-                            ->where('c.active = TRUE')
-                            ->orderBy('c.id');
-                    },
-                ],
             ])
 
-            ->add('active', null, ['required' => false, 'label' => 'calendars.label.active', 'attr' => ['disabled' => $disabled]]);
+            ->add('active', null, ['required' => false, 'label' => 'job_nurseries.label.active', 'attr' => ['disabled' => $disabled]]);
 
         if ($options['submit']) {
             $builder->add('submit', SubmitType::class, ['label' => 'actions.submit', 'attr' => ['class' => 'btn btn-primary']]);
@@ -65,7 +81,7 @@ class CalendarType extends AbstractType
         $resolver->setAllowedTypes('delete', 'boolean');
         $resolver->setAllowedTypes('submit', 'boolean');
         $resolver->setDefaults([
-            'data_class' => 'AppBundle\\Entity\\Calendar',
+            'data_class' => 'AppBundle\\Entity\\JobNursery',
             'delete' => false,
             'activate' => true,
             'submit' => true,

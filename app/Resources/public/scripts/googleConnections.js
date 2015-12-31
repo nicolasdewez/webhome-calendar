@@ -1,11 +1,11 @@
-function GoogleCalendarsList (table)
+function GoogleConnectionsList (table)
 {
     this.table = table;
-    this.deactiveLinks = this.table.find('.appGoogleCalendarsList-actions .glyphicon-remove');
-    this.activeLinks = this.table.find('.appGoogleCalendarsList-actions .glyphicon-ok');
-    this.deleteLinks = this.table.find('.appGoogleCalendarsList-actions .glyphicon-trash');
+    this.deactiveLinks = this.table.find('.appGoogleConnectionsList-actions .glyphicon-remove');
+    this.activeLinks = this.table.find('.appGoogleConnectionsList-actions .glyphicon-ok');
+    this.deleteLinks = this.table.find('.appGoogleConnectionsList-actions .glyphicon-trash');
 
-    this.list = new List('.appGoogleCalendarsList-active', '.appGoogleCalendarsList-actions');
+    this.list = new List('.appGoogleConnectionsList-active', '.appGoogleConnectionsList-actions');
 
     this.onClickDeactivateLink = function(e){
         this.list.changeState(e, false);

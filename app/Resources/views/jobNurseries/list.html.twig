@@ -1,0 +1,81 @@
+{% extends '@NdewezWebHomeCommon/base.html.twig' %}
+
+{% import "@NdewezWebHomeCommon/macros/links.html.twig" as links %}
+{% import "@NdewezWebHomeCommon/macros/icons.html.twig" as icons %}
+
+{% block title %}{{ parent() }} - {{ 'job_nurseries.title.list'|trans }}{% endblock %}
+
+{% block breadcrumb %}
+    {{ include('NdewezWebHomeCommonBundle::breadcrumb.thml.twig', {
+            'links': [
+                {'title': 'home.title.home', 'route': 'app_home'},
+                {'title': 'job_nurseries.title.list', 'active': true},
+            ]
+        })
+    }}
+{% endblock %}
+
+{% block body %}
+    <h2>{{ 'job_nurseries.title.list'|trans }}</h2>
+
+    <table class="appJobNurseriesList">
+        <thead>
+            <tr>
+                <th>{{ 'job_nurseries.label.job'|trans }}</th>
+                <th>{{ 'job_nurseries.label.day'|trans }}</th>
+                <th>{{ 'job_nurseries.label.serial'|trans }}</th>
+                <th>{{ 'job_nurseries.label.periods'|trans }}</th>
+                <th>{{ 'job_nurseries.label.active'|trans }}</th>
+                <th>{{ 'actions.label'|trans }} {% if is_granted('ROLE_CALD_NURS_ADD') %}{{ links.plus('job_nurseries.title.add'|trans, path('app_job_nurseries_add')) }}{% endif %}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for jobNursery in jobNurseries %}
+            <tr>
+                <td class="appJobNurseriesList-job">{{ jobNursery.job.title }} ({{ jobNursery.job.code }})</td>
+                <td>{{ jobNursery.day|day|trans }}</td>
+                <td class="appJobNurseriesList-active">
+                    {% if jobNursery.serial %}
+                        {{ icons.active("", jobNursery.serial) }}
+                        {{ jobNursery.numberDays }} {{ 'day'|trans }}
+                    {% else %}
+                        {{ icons.deactive("", not jobNursery.serial) }}
+                    {% endif %}
+                </td>
+                <td>{{ jobNursery.periods|length }}</td>
+                <td class="appJobNurseriesList-active">
+                    {{ icons.active("", jobNursery.active) }}
+                    {{ icons.deactive("", not jobNursery.active) }}
+                </td>
+                <td class="appJobNurseriesList-actions">
+                    {% if is_granted('ROLE_CALD_NURS_EDIT') %}
+                        {{ links.edit('actions.edit'|trans, path('app_job_nurseries_edit', {'id': jobNursery.id})) }}
+                    {% else %}
+                        {{ links.show('actions.show'|trans, path('app_job_nurseries_show', {'id': jobNursery.id})) }}
+                    {% endif %}
+
+                    {% if is_granted('ROLE_CALD_NURS_ACTIV') %}
+                        {{ links.deactive('actions.deactivate'|trans, null, path('app_job_nurseries_deactivate', {'id': jobNursery.id}), jobNursery.active) }}
+                        {{ links.active('actions.activate'|trans, null, path('app_job_nurseries_activate', {'id': jobNursery.id}), not jobNursery.active) }}
+                    {% endif %}
+
+                    {% if is_granted('ROLE_CALD_NURS_DEL') %}
+                        {{ links.delete('actions.delete'|trans, null, path('app_job_nurseries_delete', {'id': jobNursery.id})) }}
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <th colspan="6" class="text-center">{{ 'table.no_element'|trans }}</th>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        new JobNurseriesList($('.appJobNurseriesList'));
+    </script>
+{% endblock %}

@@ -4,6 +4,8 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * JobNursery.
@@ -26,6 +28,8 @@ class JobNursery
      * @var Job
      *
      * @ORM\ManyToOne(targetEntity="Job", inversedBy="nurseries")
+     *
+     * @Assert\NotNull
      */
     private $job;
 
@@ -33,6 +37,8 @@ class JobNursery
      * @var int
      *
      * @ORM\Column(type="smallint")
+     *
+     * @Assert\Range(min=1, max=7)
      */
     private $day;
 
@@ -47,6 +53,8 @@ class JobNursery
      * @var int
      *
      * @ORM\Column(type="smallint")
+     *
+     * @Assert\Range(min=0)
      */
     private $numberDays;
 
@@ -60,13 +68,16 @@ class JobNursery
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="JobNurseryPeriod", mappedBy="jobNursery")
+     * @ORM\OneToMany(targetEntity="JobNurseryPeriod", mappedBy="jobNursery", cascade={"persist", "remove"})
+     *
+     * @Assert\Valid(traverse=true)
      */
     private $periods;
 
     public function __construct()
     {
         $this->periods = new ArrayCollection();
+        $this->numberDays = 0;
     }
 
     /**
@@ -193,5 +204,49 @@ class JobNursery
     public function isActive()
     {
         return $this->active;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getPeriods()
+    {
+        return $this->periods;
+    }
+
+    /**
+     * @param JobNurseryPeriod $period
+     */
+    public function addPeriod(JobNurseryPeriod $period)
+    {
+        if ($this->periods->contains($period)) {
+            return;
+        }
+
+        $this->periods->add($period);
+        $period->setJobNursery($this);
+    }
+
+    /**
+     * @param JobNurseryPeriod $period
+     */
+    public function removePeriod(JobNurseryPeriod $period)
+    {
+        $this->periods->removeElement($period);
+        $period->setJobNursery();
+    }
+
+    /**
+     * @param ExecutionContextInterface $context
+     *
+     * @Assert\Callback
+     */
+    public function validateSerial(ExecutionContextInterface $context)
+    {
+        if ($this->isSerial() && $this->getNumberDays() <= 0) {
+            $context->buildViolation('job_nursery.number_days')
+                ->atPath('numberDays')
+                ->addViolation();
+        }
     }
 }

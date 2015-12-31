@@ -1,0 +1,3 @@
+job_nursery.number_days: Number days should be 1 or more when serial is active.
+job_nursery.time: Start time should be before end time.
+job_nursery.period_serial: Period's type and field serial should be coherents.

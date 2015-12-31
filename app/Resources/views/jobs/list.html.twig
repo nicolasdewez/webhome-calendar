@@ -54,7 +54,7 @@
                         {{ links.active('actions.activate'|trans, null, path('app_jobs_activate', {'id': job.id}), not job.active) }}
                     {% endif %}
 
-                    {% if is_granted('ROLE_CALD_JOBS_DEL') %}
+                    {% if is_granted('ROLE_CALD_JOBS_DEL') and not job.nurseries|length and not job.jobCalendars|length %}
                         {{ links.delete('actions.delete'|trans, null, path('app_jobs_delete', {'id': job.id})) }}
                     {% endif %}
                 </td>

@@ -1,0 +1,32 @@
+{% block _job_nursery_periods_row %}
+    {{- form_widget(form) -}}
+{% endblock _job_nursery_periods_row %}
+
+{% block _job_nursery_periods_widget %}
+    {% import "@NdewezWebHomeCommon/macros/links.html.twig" as links %}
+    {% for row in form %}
+        <div class="appJobNurseriesEdit-period">
+            <div class="col-md-6">
+                {{ form_widget(row) }}
+            </div>
+            <div class="col-md-6 appJobNurseriesEdit-period-remove">
+                {{ links.delete('actions.delete'|trans) }}
+            </div>
+            <div class="clear"></div>
+        </div>
+    {% endfor %}
+{% endblock _job_nursery_periods_widget %}
+
+{% block _job_nursery_periods_entry_widget %}
+    <div class="col-md-6">
+        {{ form_row(form.startTime) }}
+        {{ form_row(form.endTime) }}
+    </div>
+    <div class="col-md-6">
+        {{ form_row(form.type) }}
+        {{ form_row(form.meal) }}
+    </div>
+{% endblock _job_nursery_periods_entry_widget %}
+
+
+

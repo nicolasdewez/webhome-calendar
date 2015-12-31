@@ -27,7 +27,7 @@
         {{ form_row(form.title)}}
         {{ form_row(form.active)}}
 
-        <h3>Google connections {{ links.plus('calendars.title.add_google_connections'|trans) }}</h3>
+        <h3>{{ 'calendars.label.google_connections'|trans }} {{ links.plus('calendars.title.add_google_connections'|trans) }}</h3>
 
         <div class="appCalendarsEdit-connections" data-prototype="{{ form_widget(form.googleConnections.vars.prototype)|e }}">
             {{ form_row(form.googleConnections) }}

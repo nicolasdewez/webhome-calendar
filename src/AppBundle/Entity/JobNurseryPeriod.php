@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * JobNurseryPeriod.
@@ -12,6 +14,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class JobNurseryPeriod
 {
+    const TYPE_SAME_DAY = 1;
+    const TYPE_NEXT_DAY = 2;
+    const TYPE_SERIAL_DAY = 3;
+    const TYPE_SERIAL_DURING = 4;
+    const TYPE_SERIAL_AFTER = 5;
+
     /**
      * @var int
      *
@@ -32,6 +40,8 @@ class JobNurseryPeriod
      * @var \DateTime
      *
      * @ORM\Column(type="time")
+     *
+     * @Assert\Time
      */
     private $startTime;
 
@@ -39,6 +49,8 @@ class JobNurseryPeriod
      * @var \DateTime
      *
      * @ORM\Column(type="time")
+     *
+     * @Assert\Time
      */
     private $endTime;
 
@@ -46,6 +58,8 @@ class JobNurseryPeriod
      * @var int
      *
      * @ORM\Column(type="smallint")
+     *
+     * @Assert\Range(min=1, max=5)
      */
     private $type;
 
@@ -79,7 +93,7 @@ class JobNurseryPeriod
      *
      * @return JobNurseryPeriod
      */
-    public function setJobNursery(JobNursery $jobNursery)
+    public function setJobNursery(JobNursery $jobNursery = null)
     {
         $this->jobNursery = $jobNursery;
 
@@ -180,5 +194,44 @@ class JobNurseryPeriod
     public function isMeal()
     {
         return $this->meal;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSerialType()
+    {
+        return $this->type >= self::TYPE_SERIAL_DAY;
+    }
+
+    /**
+     * @param ExecutionContextInterface $context
+     *
+     * @Assert\Callback
+     */
+    public function validateTime(ExecutionContextInterface $context)
+    {
+        $start = $this->startTime->getTimestamp();
+        $end = $this->endTime->getTimestamp();
+
+        if ($end < $start) {
+            $context->buildViolation('job_nursery.time')
+                ->atPath('startTime')
+                ->addViolation();
+        }
+    }
+
+    /**
+     * @param ExecutionContextInterface $context
+     *
+     * @Assert\Callback
+     */
+    public function validatePeriods(ExecutionContextInterface $context)
+    {
+        if ($this->jobNursery->isSerial() !== $this->isSerialType()) {
+            $context->buildViolation('job_nursery.period_serial')
+                ->atPath('type')
+                ->addViolation();
+        }
     }
 }

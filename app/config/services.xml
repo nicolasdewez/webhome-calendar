@@ -7,12 +7,21 @@
         <!-- Menus -->
         <service id="app.menu.builder" class="AppBundle\Service\BuilderMenuItems" />
 
+        <!-- Nursery -->
+        <service id="app.nursery.period" class="AppBundle\Service\NurseryPeriod">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+
         <!-- Reports -->
         <service id="app.report.job" class="AppBundle\Service\JobReports" />
         <service id="app.report.nursery" class="AppBundle\Service\NurseryReports" />
 
         <!-- Twig Extension -->
         <service id="app.twig.time" class="AppBundle\Twig\TimeExtension" public="false">
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="app.twig.date" class="AppBundle\Twig\DateExtension" public="false">
             <tag name="twig.extension" />
         </service>
     </services>

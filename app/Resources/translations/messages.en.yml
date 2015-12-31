@@ -37,10 +37,6 @@ jobs:
         add: Job added
         delete: Job deleted
 
-    error:
-        not_deactivate: Job can't be deactivate
-        not_activate: Job can't be activate
-
 calendars:
     title:
         list: List of calendars
@@ -62,10 +58,6 @@ calendars:
         edit: Calendar edited
         add: Calendar added
         delete: Calendar deleted
-
-    error:
-        not_deactivate: Calendar can't be deactivate
-        not_activate: Calendar can't be activate
 
 google_connections:
     title:
@@ -94,9 +86,39 @@ google_connections:
         add: Google connection added
         delete: Google connection deleted
 
-    error:
-        not_deactivate: Google connection can't be deactivate
-        not_activate: Google connection can't be activate
+job_nurseries:
+    title:
+        list: List of links between job and nursery
+        edit: Edit a link between job and nursery
+        show: Show a link between job and nursery
+        add: Add a link between job and nursery
+        add_period: Add a period
+
+    label:
+        job: Job
+        day: Day
+        serial: Serial
+        number_days: Number days
+        periods: Periods
+        active: Active
+        start: Start time
+        end: End time
+        type: Type
+        meal: Meal
+
+    type:
+        same_day: Same day
+        next_day: The next day
+        serial_day: Start of the serial
+        serial_during: During the serial
+        serial_after: After the serial
+
+    message:
+        active: Link between job and nursery is now active
+        inactive: Link between job and nursery is now inactive
+        edit: Link between job and nursery edited
+        add: Link between job and nursery added
+        delete: Link between job and nursery deleted
 
 reports:
     search:

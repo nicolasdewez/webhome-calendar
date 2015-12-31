@@ -21,12 +21,12 @@ Matin
 
 Série de 1  Nuit
     -> L,Ma,Me,Je :
-        -> La jour mm :        16h à 18h
+        -> Le jour mm :        16h à 18h
         -> Le lendemain :       8h à 9h
 
 Série de 3 Nuits
     -> Ma,Me,Je    => Jour de début Ma
-        -> La jour mm :        16h à 18h      (avant de commencer la nuit)
+        -> Le jour mm :        16h à 18h      (avant de commencer la nuit)
         -> Pendant la série :   8h à 9h, 12h à 14h et 15h à 17h (Après Nuit 1, Nuit 2)
         -> Après la série :     8h à 9h, 12h à 14h (après Nuit 3)
 

@@ -46,12 +46,13 @@ function CalendarsEdit(collectionConnections, addConnectionLink, deleteConnectio
 
         this.collectionConnections.data('index', index + 1);
 
-        var newFormLi = $('<div class="col-md-10 appCalendarsEdit-element"></div>').append(newForm);
+        var newFormLiWidget = $('<div class="col-md-6"></div>').append(newForm);
         var newDeleteLink = $('<a aria-hidden="true" title="Delete" class="glyphicon glyphicon-trash " rel="" href="#"></a>');
-        var newDeleteBlock = $('<div class="col-md-2 appCalendarsEdit-remove"></div>').append(newDeleteLink);
+        var newDeleteBlock = $('<div class="col-md-6 appCalendarsEdit-connection-remove"></div>').append(newDeleteLink);
+        var newClearBlock = $('<div class="clear"></div>');
+        var newFormElement = $('<div class="appCalendarsEdit-connection"></div>').append(newFormLiWidget).append(newDeleteBlock).append(newClearBlock);
 
-        this.collectionConnections.append(newFormLi);
-        this.collectionConnections.append(newDeleteBlock);
+        this.collectionConnections.append(newFormElement);
 
         newDeleteLink.click(this.onClickDeleteConnectionLink.bind(this));
     };

@@ -5,11 +5,14 @@
 {% block _calendar_googleConnections_widget %}
     {% import "@NdewezWebHomeCommon/macros/links.html.twig" as links %}
     {% for row in form %}
-        <div class="col-md-10 appCalendarsEdit-element">
-            {{ form_widget(row) }}
-        </div>
-        <div class="col-md-2 appCalendarsEdit-remove">
-            {{ links.delete('actions.delete'|trans) }}
+        <div class="appCalendarsEdit-connection">
+            <div class="col-md-6">
+                {{ form_widget(row) }}
+            </div>
+            <div class="col-md-6 appCalendarsEdit-connection-remove">
+                {{ links.delete('actions.delete'|trans) }}
+            </div>
+            <div class="clear"></div>
         </div>
     {% endfor %}
 {% endblock _calendar_googleConnections_widget %}

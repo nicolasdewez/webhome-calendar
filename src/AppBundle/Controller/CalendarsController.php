@@ -12,7 +12,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 /**
  * Class CalendarsController.
@@ -30,7 +29,8 @@ class CalendarsController extends AbstractController
      */
     public function listAction()
     {
-        $calendars = $this->get('doctrine.orm.entity_manager')->getRepository('AppBundle:Calendar')->findBy([], ['id' => 'ASC']);
+        $manager = $this->get('doctrine.orm.entity_manager');
+        $calendars = $manager->getRepository('AppBundle:Calendar')->findBy([], ['id' => 'ASC']);
 
         return $this->render('calendars/list.html.twig', ['calendars' => $calendars]);
     }
@@ -62,7 +62,10 @@ class CalendarsController extends AbstractController
      */
     public function editAction(Calendar $calendar, Request $request)
     {
-        $form = $this->get('form.factory')->create(CalendarType::class, $calendar, ['delete' => $this->isCalendarDeletable(), 'activate' => $this->isCalendarActivate()]);
+        $form = $this->get('form.factory')->create(CalendarType::class, $calendar, [
+            'delete' => $this->isGranted('ROLE_CALD_CALD_DEL'),
+            'activate' => $this->isGranted('ROLE_CALD_CALD_ACTIV'),
+        ]);
 
         if ($form->handleRequest($request) && $form->isValid()) {
             $manager = $this->get('doctrine.orm.entity_manager');
@@ -139,10 +142,6 @@ class CalendarsController extends AbstractController
     {
         $this->assertXmlHttpRequest($request);
 
-        if (!$this->isCalendarDeletable()) {
-            throw new BadRequestHttpException($this->get('translator')->trans('calendars.error.not_activate'));
-        }
-
         $calendar->setActive(true);
         $this->get('doctrine.orm.entity_manager')->flush();
 
@@ -161,10 +160,6 @@ class CalendarsController extends AbstractController
     public function deactivateAction(Calendar $calendar, Request $request)
     {
         $this->assertXmlHttpRequest($request);
-
-        if (!$this->isCalendarDeletable()) {
-            throw new BadRequestHttpException($this->get('translator')->trans('calendars.error.not_deactivate'));
-        }
 
         $calendar->setActive(false);
         $this->get('doctrine.orm.entity_manager')->flush();
@@ -190,21 +185,5 @@ class CalendarsController extends AbstractController
         $manager->flush();
 
         return new JsonResponse(['message' => $this->get('translator')->trans('calendars.message.delete')]);
-    }
-
-    /**
-     * @return bool
-     */
-    private function isCalendarDeletable()
-    {
-        return $this->isGranted('ROLE_CALD_CALD_DEL');
-    }
-
-    /**
-     * @return bool
-     */
-    private function isCalendarActivate()
-    {
-        return $this->isGranted('ROLE_CALD_CALD_ACTIV');
     }
 }

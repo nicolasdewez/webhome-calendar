@@ -11,7 +11,6 @@ menu:
          job: Travail
          nursery: Garderie
 
-
 home:
     title:
         home: Accueil
@@ -26,8 +25,8 @@ jobs:
     label:
         code: Code
         title: Libellé
-        start: Heure début
-        end: Heure fin
+        start: Heure de début
+        end: Heure de fin
         duration: Durée (h)
         active: Actif
 
@@ -37,10 +36,6 @@ jobs:
         edit: Poste de travail modifié
         add: Poste de travail ajouté
         delete: Poste de travail supprimé
-
-    error:
-        not_deactivate: Ce poste de travail ne peut pas être désactivé
-        not_activate: Ce poste de travail ne peut pas être activé
 
 calendars:
     title:
@@ -64,10 +59,6 @@ calendars:
         add: Agenda ajouté
         delete: Agenda supprimé
 
-    error:
-        not_deactivate: Cet agenda ne peut pas être désactivé
-        not_activate: Cet agenda ne peut pas être activé
-
 google_connections:
     title:
         list: Liste des connexions Google
@@ -75,6 +66,7 @@ google_connections:
         edit: Modifier une connexion Google
         show: Voir une connexion Google
         add: Ajouter une connexion Google
+        add_period: Ajouter une période
 
     label:
         title: Libellé
@@ -95,9 +87,38 @@ google_connections:
         add: Connexion Google ajoutée
         delete: Connexion Google supprimée
 
-    error:
-        not_deactivate: La connexion Google ne peut pas être désactivée
-        not_activate: La connexion Google ne peut pas être activée
+job_nurseries:
+    title:
+        list: Liste des liens poste de travail / garderie
+        edit: Modifier un lien poste de travail / garderie
+        show: Voir un lien poste de travail / garderie
+        add: Ajouter un lien poste de travail / garderie
+
+    label:
+        job: Poste de travail
+        day: Jour
+        serial: Série
+        number_days: Nombre de jours
+        periods: Périodes
+        active: Actif
+        start: Heure de début
+        end: Heure de fin
+        type: Type
+        meal: Repas
+
+    type:
+        same_day: Le jour même
+        next_day: Le lendemain
+        serial_day: Début de série
+        serial_during: Pendant la série
+        serial_after: Après la série
+
+    message:
+        active: Le lien poste de travail / garderie est maintenant actif
+        inactive: Le lien poste de travail / garderie est maintenant inactif
+        edit: Lien poste de travail / garderie modifié
+        add: Lien poste de travail / garderie ajouté
+        delete: Lien poste de travail / garderie supprimé
 
 reports:
     search:

@@ -12,7 +12,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 /**
  * Class GoogleConnectionsController.
@@ -30,7 +29,8 @@ class GoogleConnectionsController extends AbstractController
      */
     public function listAction()
     {
-        $googleConnections = $this->get('doctrine.orm.entity_manager')->getRepository('AppBundle:GoogleConnection')->findBy([], ['id' => 'ASC']);
+        $manager = $this->get('doctrine.orm.entity_manager');
+        $googleConnections = $manager->getRepository('AppBundle:GoogleConnection')->findBy([], ['id' => 'ASC']);
 
         return $this->render('googleConnections/list.html.twig', ['googleConnections' => $googleConnections]);
     }
@@ -62,7 +62,10 @@ class GoogleConnectionsController extends AbstractController
      */
     public function editAction(GoogleConnection $googleConnection, Request $request)
     {
-        $form = $this->get('form.factory')->create(GoogleConnectionType::class, $googleConnection, ['delete' => $this->isGoogleConnectionDeletable(), 'activate' => $this->isGoogleConnectionActivate()]);
+        $form = $this->get('form.factory')->create(GoogleConnectionType::class, $googleConnection, [
+            'delete' => $this->isGranted('ROLE_CALD_GOOGL_DEL'),
+            'activate' => $this->isGranted('ROLE_CALD_GOOGL_ACTIV'),
+        ]);
 
         if ($form->handleRequest($request) && $form->isValid()) {
             $manager = $this->get('doctrine.orm.entity_manager');
@@ -137,10 +140,6 @@ class GoogleConnectionsController extends AbstractController
     {
         $this->assertXmlHttpRequest($request);
 
-        if (!$this->isGoogleConnectionDeletable()) {
-            throw new BadRequestHttpException($this->get('translator')->trans('google_connections.error.not_activate'));
-        }
-
         $googleConnection->setActive(true);
         $this->get('doctrine.orm.entity_manager')->flush();
 
@@ -159,10 +158,6 @@ class GoogleConnectionsController extends AbstractController
     public function deactivateAction(GoogleConnection $googleConnection, Request $request)
     {
         $this->assertXmlHttpRequest($request);
-
-        if (!$this->isGoogleConnectionDeletable()) {
-            throw new BadRequestHttpException($this->get('translator')->trans('google_connections.error.not_deactivate'));
-        }
 
         $googleConnection->setActive(false);
         $this->get('doctrine.orm.entity_manager')->flush();
@@ -188,21 +183,5 @@ class GoogleConnectionsController extends AbstractController
         $manager->flush();
 
         return new JsonResponse(['message' => $this->get('translator')->trans('google_connections.message.delete')]);
-    }
-
-    /**
-     * @return bool
-     */
-    private function isGoogleConnectionDeletable()
-    {
-        return $this->isGranted('ROLE_CALD_GOOGL_DEL');
-    }
-
-    /**
-     * @return bool
-     */
-    private function isGoogleConnectionActivate()
-    {
-        return $this->isGranted('ROLE_CALD_GOOGL_ACTIV');
     }
 }

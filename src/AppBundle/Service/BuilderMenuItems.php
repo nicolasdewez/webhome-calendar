@@ -50,7 +50,7 @@ class BuilderMenuItems implements BuilderMenuItemsInterface
                 $subItem = new MenuItemLink();
                 $subItem
                     ->setTitle('menu.parameters.job_nurseries')
-                    ->setRoute('app_home');
+                    ->setRoute('app_job_nurseries_list');
 
                 $item->addItem($subItem);
             }

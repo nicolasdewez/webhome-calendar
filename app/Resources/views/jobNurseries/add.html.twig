@@ -1,0 +1,30 @@
+{% extends '@NdewezWebHomeCommon/base.html.twig' %}
+
+{% form_theme form 'jobNurseries/form_theme_jobNurseryPeriods.html.twig' %}
+
+{% block title %}{{ parent() }} - {{ 'job_nurseries.title.add'|trans }}{% endblock %}
+
+{% block breadcrumb %}
+    {{ include('NdewezWebHomeCommonBundle::breadcrumb.thml.twig', {
+            'links': [
+                {'title': 'home.title.home', 'route': 'app_home'},
+                {'title': 'job_nurseries.title.list', 'route': 'app_job_nurseries_list'},
+                {'title': 'job_nurseries.title.add', 'active': true},
+            ]
+        })
+    }}
+{% endblock %}
+
+{% block body %}
+    <h2>{{ 'job_nurseries.title.add'|trans }}</h2>
+
+    {{ form(form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        new JobNurseriesForm($('#job_nursery_serial'), $('#job_nursery_numberDays'));
+    </script>
+{% endblock %}

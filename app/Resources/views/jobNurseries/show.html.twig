@@ -1,0 +1,20 @@
+{% extends '@NdewezWebHomeCommon/base.html.twig' %}
+
+{% block title %}{{ parent() }} - {{ 'job_nurseries.title.show'|trans }}{% endblock %}
+
+{% block breadcrumb %}
+    {{ include('NdewezWebHomeCommonBundle::breadcrumb.thml.twig', {
+            'links': [
+                {'title': 'home.title.home', 'route': 'app_home'},
+                {'title': 'job_nurseries.title.list', 'route': 'app_job_nurseries_list'},
+                {'title': 'job_nurseries.title.show', 'active': true},
+            ]
+        })
+    }}
+{% endblock %}
+
+{% block body %}
+    <h2>{{ 'job_nurseries.title.show'|trans }}</h2>
+
+    {{ form(form) }}
+{% endblock %}

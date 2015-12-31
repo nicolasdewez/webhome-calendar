@@ -1,0 +1,3 @@
+job_nursery.number_days: Le nombre de jours doit être supérieur ou égal à 1 lorsque la série est active.
+job_nursery.time: L'heure de début doit être avant l'heure de fin.
+job_nursery.period_serial: Le type de période et le champ série doivent être cohérents.

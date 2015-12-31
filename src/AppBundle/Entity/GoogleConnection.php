@@ -235,7 +235,7 @@ class GoogleConnection
     {
         return $this->internalId;
     }
-    
+
     /**
      * Set jobDayComplete.
      *
@@ -259,7 +259,7 @@ class GoogleConnection
     {
         return $this->jobDayComplete;
     }
-    
+
     /**
      * Set nurseryDayComplete.
      *
@@ -283,7 +283,7 @@ class GoogleConnection
     {
         return $this->nurseryDayComplete;
     }
-    
+
     /**
      * Set active.
      *

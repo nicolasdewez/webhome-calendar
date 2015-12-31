@@ -1,0 +1,52 @@
+{% extends '@NdewezWebHomeCommon/base.html.twig' %}
+
+{% form_theme form 'jobNurseries/form_theme_jobNurseryPeriods.html.twig' %}
+
+{% import "@NdewezWebHomeCommon/macros/forms.html.twig" as forms %}
+{% import "@NdewezWebHomeCommon/macros/links.html.twig" as links %}
+
+{% block title %}{{ parent() }} - {{ 'job_nurseries.title.edit'|trans }}{% endblock %}
+
+{% block breadcrumb %}
+    {{ include('NdewezWebHomeCommonBundle::breadcrumb.thml.twig', {
+            'links': [
+                {'title': 'home.title.home', 'route': 'app_home'},
+                {'title': 'job_nurseries.title.list', 'route': 'app_job_nurseries_list'},
+                {'title': 'job_nurseries.title.edit', 'active': true},
+            ]
+        })
+    }}
+{% endblock %}
+
+{% block body %}
+
+    <h2>{{ 'job_nurseries.title.edit'|trans }}</h2>
+
+    {{ form_start(form) }}
+        {{ form_row(form.job)}}
+        {{ form_row(form.day)}}
+        {{ form_row(form.serial)}}
+        {{ form_row(form.numberDays)}}
+        {{ form_row(form.active)}}
+
+        <h3>{{ 'job_nurseries.label.periods'|trans }} {{ links.plus('job_nurseries.title.add_period'|trans) }}</h3>
+
+        <div class="appJobNurseriesEdit-periods" data-prototype="{{ form_widget(form.periods.vars.prototype)|e }}">
+            {{ form_row(form.periods) }}
+        </div>
+
+        <div class="clear"></div>
+        <div class="appJobNurseriesEdit-buttons">
+            {{ forms.buttons(form, ['submit', 'delete']) }}
+        </div>
+    {{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        new JobNurseriesEdit($('.appJobNurseriesEdit-periods'), $('a.glyphicon-plus'), $('.appJobNurseriesEdit-period-remove a'));
+        new JobNurseriesForm($('#job_nursery_serial'), $('#job_nursery_numberDays'));
+    </script>
+{% endblock %}
