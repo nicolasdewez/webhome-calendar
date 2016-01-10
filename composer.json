@@ -20,7 +20,9 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "robmorgan/phinx": "~0.5",
         "jms/serializer-bundle": "~1.0",
-        "nicolasdewez/webhome-common": "dev-master"
+        "nicolasdewez/webhome-common": "dev-master",
+        "nicolasdewez/webhome-auth-api": "dev-master",
+        "nicolasdewez/webhome-calendar-api": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

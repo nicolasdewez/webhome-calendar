@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a06f0495b525941814e1a9585767a1c2",
-    "content-hash": "bd62f2a8919dab94db7da4f93e43250c",
+    "hash": "e827198d2102a53f22df4134f8e1f5d6",
+    "content-hash": "d80deaf83647165aedef94627c11d2de",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -77,33 +77,33 @@
         },
         {
             "name": "doctrine/cache",
-            "version": "v1.5.4",
+            "version": "v1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/cache.git",
-                "reference": "47cdc76ceb95cc591d9c79a36dc3794975b5d136"
+                "reference": "f8af318d14bdb0eff0336795b428b547bd39ccb6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/cache/zipball/47cdc76ceb95cc591d9c79a36dc3794975b5d136",
-                "reference": "47cdc76ceb95cc591d9c79a36dc3794975b5d136",
+                "url": "https://api.github.com/repos/doctrine/cache/zipball/f8af318d14bdb0eff0336795b428b547bd39ccb6",
+                "reference": "f8af318d14bdb0eff0336795b428b547bd39ccb6",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.2"
+                "php": "~5.5|~7.0"
             },
             "conflict": {
                 "doctrine/common": ">2.2,<2.4"
             },
             "require-dev": {
-                "phpunit/phpunit": ">=3.7",
+                "phpunit/phpunit": "~4.8|~5.0",
                 "predis/predis": "~1.0",
                 "satooshi/php-coveralls": "~0.6"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.5.x-dev"
+                    "dev-master": "1.6.x-dev"
                 }
             },
             "autoload": {
@@ -143,7 +143,7 @@
                 "cache",
                 "caching"
             ],
-            "time": "2015-12-19 05:03:47"
+            "time": "2015-12-31 16:37:02"
         },
         {
             "name": "doctrine/collections",
@@ -286,16 +286,16 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "v2.5.3",
+            "version": "v2.5.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "2fbcea96eae34a53183377cdbb0b9bec33974648"
+                "reference": "abbdfd1cff43a7b99d027af3be709bc8fc7d4769"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/2fbcea96eae34a53183377cdbb0b9bec33974648",
-                "reference": "2fbcea96eae34a53183377cdbb0b9bec33974648",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/abbdfd1cff43a7b99d027af3be709bc8fc7d4769",
+                "reference": "abbdfd1cff43a7b99d027af3be709bc8fc7d4769",
                 "shasum": ""
             },
             "require": {
@@ -353,7 +353,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2015-12-25 16:28:24"
+            "time": "2016-01-05 22:11:12"
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -697,16 +697,16 @@
         },
         {
             "name": "doctrine/orm",
-            "version": "v2.5.3",
+            "version": "v2.5.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/doctrine2.git",
-                "reference": "d9fc5388f1aa1751a0e148e76b4569bd207338e9"
+                "reference": "bc4ddbfb0114cb33438cc811c9a740d8aa304aab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/d9fc5388f1aa1751a0e148e76b4569bd207338e9",
-                "reference": "d9fc5388f1aa1751a0e148e76b4569bd207338e9",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/bc4ddbfb0114cb33438cc811c9a740d8aa304aab",
+                "reference": "bc4ddbfb0114cb33438cc811c9a740d8aa304aab",
                 "shasum": ""
             },
             "require": {
@@ -721,7 +721,6 @@
             },
             "require-dev": {
                 "phpunit/phpunit": "~4.0",
-                "satooshi/php-coveralls": "dev-master",
                 "symfony/yaml": "~2.3|~3.0"
             },
             "suggest": {
@@ -770,7 +769,7 @@
                 "database",
                 "orm"
             ],
-            "time": "2015-12-25 15:50:05"
+            "time": "2016-01-05 21:34:58"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -1659,22 +1658,97 @@
             "time": "2015-10-14 12:51:02"
         },
         {
+            "name": "nicolasdewez/webhome-auth-api",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nicolasdewez/webhome-auth-api.git",
+                "reference": "bcc53fc3824add12fab303d2cb77fb719d7205bd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nicolasdewez/webhome-auth-api/zipball/bcc53fc3824add12fab303d2cb77fb719d7205bd",
+                "reference": "bcc53fc3824add12fab303d2cb77fb719d7205bd",
+                "shasum": ""
+            },
+            "require": {
+                "jms/serializer-bundle": "^1.0",
+                "nicolasdewez/webhome-common": "dev-master",
+                "php": ">=5.3.9",
+                "symfony/framework-bundle": "~2.8",
+                "symfony/monolog-bundle": "~2.4"
+            },
+            "require-dev": {
+                "sensio/generator-bundle": "~2.3"
+            },
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "Ndewez\\WebHome\\AuthApiBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "WebHome Project - Auth Api",
+            "time": "2016-01-10 21:23:02"
+        },
+        {
+            "name": "nicolasdewez/webhome-calendar-api",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nicolasdewez/webhome-calendar-api.git",
+                "reference": "9fa5c4557870808750f8f6b6d6b034f76b9398be"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nicolasdewez/webhome-calendar-api/zipball/9fa5c4557870808750f8f6b6d6b034f76b9398be",
+                "reference": "9fa5c4557870808750f8f6b6d6b034f76b9398be",
+                "shasum": ""
+            },
+            "require": {
+                "jms/serializer-bundle": "^1.0",
+                "nicolasdewez/webhome-common": "dev-master",
+                "php": ">=5.3.9",
+                "symfony/framework-bundle": "~2.8",
+                "symfony/monolog-bundle": "~2.4"
+            },
+            "require-dev": {
+                "sensio/generator-bundle": "~2.3"
+            },
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "Ndewez\\WebHome\\CalendarApiBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "WebHome Project - Calendar Api",
+            "time": "2016-01-06 21:05:45"
+        },
+        {
             "name": "nicolasdewez/webhome-common",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nicolasdewez/webhome-common.git",
-                "reference": "ef1ff324a7cb0741bc9377ac7fff446d7afbed98"
+                "reference": "f9fb3d14dcf28ab2aede863511c0bc823569d807"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nicolasdewez/webhome-common/zipball/ef1ff324a7cb0741bc9377ac7fff446d7afbed98",
-                "reference": "ef1ff324a7cb0741bc9377ac7fff446d7afbed98",
+                "url": "https://api.github.com/repos/nicolasdewez/webhome-common/zipball/f9fb3d14dcf28ab2aede863511c0bc823569d807",
+                "reference": "f9fb3d14dcf28ab2aede863511c0bc823569d807",
                 "shasum": ""
             },
             "require": {
                 "guzzlehttp/guzzle": "^6.1",
                 "hwi/oauth-bundle": "~0.3",
+                "nicolasdewez/webhome-auth-api": "dev-master",
                 "php": ">=5.3.9",
                 "symfony/framework-bundle": "~2.8"
             },
@@ -1689,20 +1763,20 @@
                 "MIT"
             ],
             "description": "WebHome Project - Common",
-            "time": "2015-12-31 15:09:09"
+            "time": "2016-01-10 18:23:34"
         },
         {
             "name": "paragonie/random_compat",
-            "version": "1.1.4",
+            "version": "1.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "d762ee5b099a29044603cd4649851e81aa66cb47"
+                "reference": "dd8998b7c846f6909f4e7a5f67fabebfc412a4f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/d762ee5b099a29044603cd4649851e81aa66cb47",
-                "reference": "d762ee5b099a29044603cd4649851e81aa66cb47",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/dd8998b7c846f6909f4e7a5f67fabebfc412a4f7",
+                "reference": "dd8998b7c846f6909f4e7a5f67fabebfc412a4f7",
                 "shasum": ""
             },
             "require": {
@@ -1737,7 +1811,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2015-12-10 14:48:13"
+            "time": "2016-01-06 13:31:20"
         },
         {
             "name": "phpcollection/phpcollection",
@@ -1928,27 +2002,26 @@
         },
         {
             "name": "robmorgan/phinx",
-            "version": "v0.5.0",
+            "version": "v0.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/robmorgan/phinx.git",
-                "reference": "df8933786806848fbf330f88d69998f29c29d8c4"
+                "reference": "9e41ae609670645546e08e3907a68b3b8fb60f31"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/robmorgan/phinx/zipball/df8933786806848fbf330f88d69998f29c29d8c4",
-                "reference": "df8933786806848fbf330f88d69998f29c29d8c4",
+                "url": "https://api.github.com/repos/robmorgan/phinx/zipball/9e41ae609670645546e08e3907a68b3b8fb60f31",
+                "reference": "9e41ae609670645546e08e3907a68b3b8fb60f31",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.2",
-                "symfony/config": "~2.7",
-                "symfony/console": "~2.7",
-                "symfony/yaml": "~2.7"
+                "php": ">=5.4",
+                "symfony/config": "~2.8|~3.0",
+                "symfony/console": "~2.8|~3.0",
+                "symfony/yaml": "~2.8|~3.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "3.7.*",
-                "squizlabs/php_codesniffer": "dev-phpcs-fixer"
+                "phpunit/phpunit": "^3.7|^4.0|^5.0"
             },
             "bin": [
                 "bin/phinx"
@@ -1986,7 +2059,7 @@
                 "migrations",
                 "phinx"
             ],
-            "time": "2015-11-30 15:21:12"
+            "time": "2015-12-30 21:16:52"
         },
         {
             "name": "sensio/distribution-bundle",
@@ -2981,17 +3054,17 @@
         },
         {
             "name": "nelmio/api-doc-bundle",
-            "version": "2.11.1",
+            "version": "2.11.2",
             "target-dir": "Nelmio/ApiDocBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nelmio/NelmioApiDocBundle.git",
-                "reference": "19d4e37365edd5104e31662a2d3b510d92a7e78a"
+                "reference": "1ae2cfa9a50279d722d6b6e7b02322cef948d55d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/19d4e37365edd5104e31662a2d3b510d92a7e78a",
-                "reference": "19d4e37365edd5104e31662a2d3b510d92a7e78a",
+                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/1ae2cfa9a50279d722d6b6e7b02322cef948d55d",
+                "reference": "1ae2cfa9a50279d722d6b6e7b02322cef948d55d",
                 "shasum": ""
             },
             "require": {
@@ -3061,7 +3134,7 @@
                 "documentation",
                 "rest"
             ],
-            "time": "2015-12-08 13:19:42"
+            "time": "2015-12-16 15:17:51"
         },
         {
             "name": "phpdocumentor/reflection-docblock",
@@ -3963,7 +4036,9 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "nicolasdewez/webhome-common": 20
+        "nicolasdewez/webhome-common": 20,
+        "nicolasdewez/webhome-auth-api": 20,
+        "nicolasdewez/webhome-calendar-api": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

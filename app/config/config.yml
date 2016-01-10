@@ -9,6 +9,7 @@ parameters:
     app.code: CALD
     app.name: Calendar
     app.icon: glyphicon-calendar
+    webhome_auth_url_api: "%webhome_auth_url%/api"
 
 framework:
     esi:             ~
@@ -99,3 +100,16 @@ ndewez_web_home_common:
     menu:
         session: false
         builder: app.menu.builder
+    api_user_connected:
+        session_key: user
+        access_token_key:
+            header: access-token
+            get: access_token
+#        required_paths:
+#            - ^/api/v0/calendars
+        optional_paths:
+            - ^/api/v0
+
+ndewez_web_home_auth_api:
+    api_url: %webhome_auth_url_api%
+    api_version: 0

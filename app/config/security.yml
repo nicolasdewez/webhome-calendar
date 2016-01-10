@@ -8,11 +8,6 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js|fonts)/
             security: false
 
-        api:
-            pattern:    ^/api
-            stateless:  true
-            anonymous:  true
-
         secured_area:
             anonymous: ~
             logout:
