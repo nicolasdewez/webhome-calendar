@@ -22,7 +22,10 @@
         "jms/serializer-bundle": "~1.0",
         "nicolasdewez/webhome-common": "dev-master",
         "nicolasdewez/webhome-auth-api": "dev-master",
-        "nicolasdewez/webhome-calendar-api": "dev-master"
+        "nicolasdewez/webhome-calendar-api": "dev-master",
+        "nelmio/cors-bundle": "^1.4",
+        "php-amqplib/rabbitmq-bundle": "^1.8",
+        "google/apiclient": "^1.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

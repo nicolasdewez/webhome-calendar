@@ -35,3 +35,7 @@ Série de 3 Nuits
         -> Après la série :     8h à 9h, 12h à 14h (après Nuit 3)
 
 */
+
+
+Rabbitmq :
+docker run -d -P rabbitmq:3-management  

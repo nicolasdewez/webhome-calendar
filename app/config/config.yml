@@ -96,6 +96,55 @@ hwi_oauth:
                 locale:     locale
                 roles:      group.authorizations
 
+nelmio_cors:
+    paths:
+        '^/api/':
+            allow_origin: ['%webhome_app_origin%']
+            allow_credentials: false
+            allow_headers: ['*']
+            allow_methods: ['POST', 'GET', 'PUT', 'DELETE', 'OPTIONS']
+            max_age: 3600
+
+old_sound_rabbit_mq:
+    connections:
+        default:
+            host:     'localhost'
+            port:     32769
+            user:     'guest'
+            password: 'guest'
+            vhost:    '/'
+            lazy:     false
+            connection_timeout: 3
+            read_write_timeout: 3
+
+    producers:
+        google_create:
+            connection:       default
+            exchange_options: {name: 'google-create', type: direct}
+        google_update:
+            connection:       default
+            exchange_options: {name: 'google-update', type: direct}
+        google_delete:
+            connection:       default
+            exchange_options: {name: 'google-delete', type: direct}
+
+    consumers:
+        google_create:
+            connection:       default
+            exchange_options: {name: 'google-create', type: direct}
+            queue_options:    {name: 'google-create'}
+            callback:         app.consumer.google.create
+        google_update:
+            connection:       default
+            exchange_options: {name: 'google-update', type: direct}
+            queue_options:    {name: 'google-update'}
+            callback:         app.consumer.google.update
+        google_delete:
+            connection:       default
+            exchange_options: {name: 'google-delete', type: direct}
+            queue_options:    {name: 'google-delete'}
+            callback:         app.consumer.google.delete
+
 ndewez_web_home_common:
     menu:
         session: false
@@ -103,12 +152,12 @@ ndewez_web_home_common:
     api_user_connected:
         session_key: user
         access_token_key:
-            header: access-token
+            header: authorization
             get: access_token
-#        required_paths:
-#            - ^/api/v0/calendars
-        optional_paths:
+        required_paths:
             - ^/api/v0
+#        optional_paths:
+#            - ^/api/v0
 
 ndewez_web_home_auth_api:
     api_url: %webhome_auth_url_api%

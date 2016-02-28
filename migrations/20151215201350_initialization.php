@@ -16,6 +16,7 @@ class Initialization extends AbstractMigration
         $this->execute('CREATE SEQUENCE job_calendar_id_seq INCREMENT BY 1 MINVALUE 1 START 1;');
         $this->execute('CREATE SEQUENCE google_connections_id_seq INCREMENT BY 1 MINVALUE 1 START 1;');
         $this->execute('CREATE SEQUENCE jobs_id_seq INCREMENT BY 1 MINVALUE 1 START 1;');
+        $this->execute('CREATE SEQUENCE google_links_id_seq INCREMENT BY 1 MINVALUE 1 START 1;');
         $this->execute('CREATE TABLE job_nursery_periods (id INT NOT NULL, job_nursery_id INT DEFAULT NULL, start_time TIME(0) WITHOUT TIME ZONE NOT NULL, end_time TIME(0) WITHOUT TIME ZONE NOT NULL, type SMALLINT NOT NULL, meal BOOLEAN NOT NULL, PRIMARY KEY(id));');
         $this->execute('CREATE INDEX IDX_8DF0EA1A9B0EC81B ON job_nursery_periods (job_nursery_id);');
         $this->execute('CREATE TABLE nursery_calendars (id INT NOT NULL, calendar_id INT DEFAULT NULL, date DATE NOT NULL, start_time TIME(0) WITHOUT TIME ZONE NOT NULL, end_time TIME(0) WITHOUT TIME ZONE NOT NULL, meal BOOLEAN NOT NULL, PRIMARY KEY(id));');
@@ -40,5 +41,8 @@ class Initialization extends AbstractMigration
         $this->execute('ALTER TABLE job_nurseries ADD CONSTRAINT FK_A18D5FF1BE04EA9 FOREIGN KEY (job_id) REFERENCES jobs (id) NOT DEFERRABLE INITIALLY IMMEDIATE;');
         $this->execute('ALTER TABLE job_calendar ADD CONSTRAINT FK_9EE043DBE04EA9 FOREIGN KEY (job_id) REFERENCES jobs (id) NOT DEFERRABLE INITIALLY IMMEDIATE;');
         $this->execute('ALTER TABLE job_calendar ADD CONSTRAINT FK_9EE043DA40A2C8 FOREIGN KEY (calendar_id) REFERENCES calendars (id) NOT DEFERRABLE INITIALLY IMMEDIATE;');
+        $this->execute('CREATE TABLE google_links (id INT NOT NULL, connection_id INT DEFAULT NULL, event_id VARCHAR(255) NOT NULL, type VARCHAR(255) NOT NULL, calendar_id INT NOT NULL, internal_id INT NOT NULL, PRIMARY KEY(id));');
+        $this->execute('CREATE INDEX IDX_C3A1A7D2DD03F01 ON google_links (connection_id);');
+        $this->execute('ALTER TABLE google_links ADD CONSTRAINT FK_C3A1A7D2DD03F01 FOREIGN KEY (connection_id) REFERENCES google_connections (id) NOT DEFERRABLE INITIALLY IMMEDIATE;');
     }
 }

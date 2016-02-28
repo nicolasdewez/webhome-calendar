@@ -8,8 +8,20 @@ use Ndewez\WebHome\CalendarApiBundle\V0\Model\Calendar as Model;
 /**
  * Class CalendarTransformer.
  */
-class CalendarTransformer
+class CalendarTransformer extends AbstractTransformer
 {
+    /** @var GoogleConnectionTransformer */
+    private $googleConnectionTransformer;
+
+    /**
+     * @param GoogleConnectionTransformer $googleConnectionTransformer
+     */
+    public function __construct(GoogleConnectionTransformer $googleConnectionTransformer)
+    {
+        $this->googleConnectionTransformer = $googleConnectionTransformer;
+        $this->setMode();
+    }
+
     /**
      * @param Calendar $calendar
      *
@@ -21,7 +33,14 @@ class CalendarTransformer
         $model
             ->setId($calendar->getId())
             ->setTitle($calendar->getTitle())
+            ->setActive($calendar->isActive())
         ;
+
+        if ($this->isModeFull()) {
+            $model->setGoogleConnections(
+                $this->googleConnectionTransformer->entitiesToModel($calendar->getGoogleConnections()->toArray())
+            );
+        }
 
         return $model;
     }
@@ -34,7 +53,7 @@ class CalendarTransformer
     public function entitiesToModel(array $calendars)
     {
         $models = [];
-        foreach($calendars as $calendar) {
+        foreach ($calendars as $calendar) {
             $models[] = $this->entityToModel($calendar);
         }
 

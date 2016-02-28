@@ -5,7 +5,16 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <!-- Transformers -->
-        <service id="app.transformer.calendar" class="AppBundle\Service\Transformer\CalendarTransformer" />
+        <service id="app.transformer.job" class="AppBundle\Service\Transformer\JobTransformer" />
+        <service id="app.transformer.google_connection" class="AppBundle\Service\Transformer\GoogleConnectionTransformer" />
+        <service id="app.transformer.calendar" class="AppBundle\Service\Transformer\CalendarTransformer">
+            <argument type="service" id="app.transformer.google_connection" />
+        </service>
+        <service id="app.transformer.job_calendar" class="AppBundle\Service\Transformer\JobCalendarTransformer">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+            <argument type="service" id="app.transformer.job" />
+            <argument type="service" id="app.transformer.calendar" />
+        </service>
 
         <!-- Menus -->
         <service id="app.menu.builder" class="AppBundle\Service\BuilderMenuItems" />
@@ -18,6 +27,40 @@
         <!-- Reports -->
         <service id="app.report.job" class="AppBundle\Service\JobReports" />
         <service id="app.report.nursery" class="AppBundle\Service\NurseryReports" />
+
+        <!-- Calendar -->
+        <service id="app.calendar.job" class="AppBundle\Service\CalendarJob">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="serializer" />
+            <argument type="service" id="app.transformer.job_calendar" />
+            <argument type="service" id="event_dispatcher" />
+        </service>
+
+        <!-- EventListener -->
+        <service id="app.subscriber.job_calendar.google" class="AppBundle\EventListener\GoogleJobSubscriber">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="serializer" />
+            <argument type="service" id="app.transformer.job_calendar" />
+            <argument type="service" id="old_sound_rabbit_mq.google_create_producer" />
+            <argument type="service" id="old_sound_rabbit_mq.google_update_producer" />
+            <argument type="service" id="old_sound_rabbit_mq.google_delete_producer" />
+            <tag name="kernel.event_subscriber" />
+        </service>
+
+        <!-- Google -->
+        <service id="app.client.google" class="AppBundle\Service\GoogleCalendarClient" />
+
+        <!-- Consumer -->
+        <service id="app.consumer.google" class="AppBundle\Consumer\AbstractGoogleEventConsumer" abstract="true">
+            <argument type="service" id="serializer" />
+            <argument type="service" id="app.client.google" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="logger" />
+        </service>
+
+        <service id="app.consumer.google.create" class="AppBundle\Consumer\GoogleCreateEventConsumer" parent="app.consumer.google" />
+        <service id="app.consumer.google.update" class="AppBundle\Consumer\GoogleUpdateEventConsumer" parent="app.consumer.google" />
+        <service id="app.consumer.google.delete" class="AppBundle\Consumer\GoogleDeleteEventConsumer" parent="app.consumer.google" />
 
         <!-- Twig Extension -->
         <service id="app.twig.time" class="AppBundle\Twig\TimeExtension" public="false">

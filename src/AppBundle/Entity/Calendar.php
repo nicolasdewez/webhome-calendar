@@ -14,6 +14,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Calendar
 {
+    const EVENT_TYPE_JOB = 'JOBCALENDAR';
+    const EVENT_TYPE_NURSERY = 'NURSERYCALENDAR';
+
     /**
      * @var int
      *
@@ -50,7 +53,7 @@ class Calendar
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="JobCalendar", mappedBy="calendar")
+     * @ORM\OneToMany(targetEntity="JobCalendar", mappedBy="calendar", cascade={"persist"})
      */
     private $jobCalendars;
 
