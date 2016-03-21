@@ -108,10 +108,10 @@ nelmio_cors:
 old_sound_rabbit_mq:
     connections:
         default:
-            host:     'localhost'
-            port:     32769
-            user:     'guest'
-            password: 'guest'
+            host:     '%rabbitmq_host%'
+            port:     %rabbitmq_port%
+            user:     '%rabbitmq_user%'
+            password: '%rabbitmq_password%'
             vhost:    '/'
             lazy:     false
             connection_timeout: 3

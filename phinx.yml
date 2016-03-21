@@ -6,7 +6,7 @@ environments:
     default_database: pgsql
     pgsql:
         adapter: pgsql
-        host: 127.0.0.1
+        host: db
         name: webhome-calendar
         user: ndewez
         pass: ndewez

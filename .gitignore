@@ -11,7 +11,8 @@
 /app/phpunit.xml
 /build/
 /vendor/
-/bin/
+/bin/*
+!/bin/install
 /composer.phar
 /bower_components/
 /node_modules/
